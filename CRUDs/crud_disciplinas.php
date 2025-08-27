@@ -1,13 +1,13 @@
-<?php
-  echo("Marcos Souza");
+<?php 
+
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora em PHP</title>
+  <title>Document</title>
 </head>
 <body>
   
