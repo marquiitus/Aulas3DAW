@@ -1,7 +1,3 @@
-<?php
-  
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,6 +6,12 @@
   <title>Calculadora em PHP</title>
 </head>
 <body>
+  <?php
+
+    echo "Hello World!!";
   
+  ?>
+
+
 </body>
 </html>
