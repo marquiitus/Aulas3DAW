@@ -18,8 +18,47 @@
     <li><a href="crudUsuarios.php">CRUD Usuários</a></li>
   </ul>
 
+  <h2>Criar Pergunta de Múltipla Escolha</h2>
+
+  <form action="criarPerguntaMultipla.php" method="post">
+    <b>Número da Pergunta:</b><br>
+    <input type="text" name="numPergunta"><br>
+    <b>Pergunta:</b><br>
+    <input type="text" name="pergunta" size="50"><br>
+    <b>Alternativa A:</b><br>
+    <input type="text" name="alternativaA" size="50"><br>
+    <b>Alternativa B:</b><br>
+    <input type="text" name="alternativaB" size="50"><br>
+    <b>Alternativa C:</b><br>
+    <input type="text" name="alternativaC" size="50"><br>
+    <b>Alternativa D:</b><br>
+    <input type="text" name="alternativaD" size="50"><br>
+    <b>Alternativa E:</b><br>
+    <input type="text" name="alternativaE" size="50"><br>
+    <b>Gabarito (A, B, C, D ou E):</b><br>
+    <input type="text" name="alternativaGabarito" size="10">
+    <br><br>
+    <input type="submit" value="Criar Pergunta">
+  </form>
+
   <?php
-    echo "teste";
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $numPergunta = $_POST["numPergunta"];
+      $pergunta = $_POST["pergunta"]; 
+      $altA = $_POST["alternativaA"];
+      $altB = $_POST["alternativaB"];
+      $altC = $_POST["alternativaC"];
+      $altD = $_POST["alternativaD"];
+      $altE = $_POST["alternativaE"];
+      $altGabarito = $_POST["alternativaGabarito"];
+
+      $arquivo = fopen("perguntasRespostas.txt", "a");
+      $linha = $numPergunta . ";" . $pergunta . ";" . $altA . ";" . $altB . ";" . $altC . ";" . $altD . ";" . $altE . ";" . $altGabarito . "\n";
+
+      fwrite($arquivo, $linha);
+      fclose($arquivo);
+      echo "<br><b>Pergunta cadastrada com sucesso!</b>";
+    }
   ?>
 </body>
 </html>
