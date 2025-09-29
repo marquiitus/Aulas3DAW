@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alterar Pergunta Múltipla</title>
+</head>
+<body>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="criarPerguntaMultipla.php">Criar Perguntas e Respostas de Múltipla Escolha</a></li>
+    <li><a href="criarPerguntaTexto.php">Criar Perguntas e Respostas de Texto</a></li>
+    <li><a href="alterarPerguntaMultipla.php">Alterar Perguntas e Respostas de Múltipla Escolha</a></li>
+    <li><a href="alterarPerguntaTexto.php">Alterar Perguntas e Respostas de Texto</a></li>
+    <li><a href="listarPerguntasRespostas.php">Listar Perguntas e Respostas</a></li>
+    <li><a href="listarPergunta.php">Listar uma Pergunta</a></li>
+    <li><a href="excluirPerguntaResposta.php">Excluir Pergunta e respostas</a></li>
+    <li><a href="crudUsuarios.php">CRUD Usuários</a></li>
+  </ul>
+
+  <?php
+    echo "teste";
+  ?>
+</body>
+</html>

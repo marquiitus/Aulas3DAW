@@ -1,0 +1,2 @@
+numPergunta;pergunta;alternativaA;alternativaB;alternativaC;alternativaD;alternativaE;alternativaGabarito
+1;Pergunta Teste?;TesteA;TesteB;TesteC;TesteD;TesteE;A
