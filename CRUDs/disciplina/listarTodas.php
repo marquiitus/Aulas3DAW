@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Alunos</title>
+  <title>Lista de Disciplinas</title>
   <style>
     table { border-collapse: collapse; width: 100%; margin: 20px 0; }
     th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
@@ -13,24 +13,26 @@
   </style>
 </head>
 <body>
-  <h1>Lista de Alunos</h1>
+  <h1>Lista de Disciplinas</h1>
   
   <div class="menu">
-    <a href="incluir.php">Adicionar Novo Aluno</a> | <a href="buscar_aluno.php">Buscar Aluno</a>
+    <a href="incluir.php">Adicionar Nova Disciplina</a> | 
+    <a href="buscar.php">Buscar Disciplina</a>
   </div>
 
   <table>
     <tr>
-      <th>Matrícula</th>
       <th>Nome</th>
-      <th>E-mail</th>
+      <th>Sigla</th>
+      <th>Carga Horária</th>
       <th>Ações</th>
     </tr>
   
   <?php 
-  $arquivo = fopen("alunos.txt", "r") or die("Arquivo não encontrado!");
+  $arquivo = fopen("disciplinas.txt", "r") or die("Arquivo não encontrado!");
 
-  fgets($arquivo);  
+  fgets($arquivo);
+  
   while(!feof($arquivo))
   {
     $linha = fgets($arquivo);
@@ -45,8 +47,8 @@
       echo "<td>$dados[1]</td>";
       echo "<td>$dados[2]</td>";
       echo "<td class='actions'>";
-      echo "<a href='alterar.php?matricula=$dados[0]'>Editar</a>";
-      echo "<a href='excluir.php?matricula=$dados[0]' onclick='return confirm(\"Tem certeza?\")'>Excluir</a>";
+      echo "<a href='alterar.php?sigla=$dados[1]'>Editar</a>";
+      echo "<a href='excluir.php?sigla=$dados[1]' onclick='return confirm(\"Tem certeza?\")'>Excluir</a>";
       echo "</td>";
       echo "</tr>";
     }

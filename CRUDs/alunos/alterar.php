@@ -91,7 +91,7 @@
         fwrite($arquivo, $aluno . "\n");
       
       fclose($arquivo);
-      header("Location: listarUm.php ? matricula = $nova_matricula");
+      header("Location: listarTodos.php ? matricula = $nova_matricula");
     }
   ?>
 </body>

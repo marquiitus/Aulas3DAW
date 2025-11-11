@@ -3,42 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Incluir Aluno</title>
+  <title>Incluir Disciplina</title>
 </head>
 <body>
-  <h1>Incluir Novo Aluno</h1>
-  
-  <a href="listarTodos.php">← Voltar para a lista</a>
+  <h1>Incluir Nova Disciplina</h1>
+  <a href="listarTodas.php">← Voltar para a lista</a>
 
   <form method="post">
-    <p>
-      <label>Matrícula:</label><br>
-      <input type="text" name="matricula" required>
-    </p>
     <p>
       <label>Nome:</label><br>
       <input type="text" name="nome" required>
     </p>
     <p>
-      <label>E-mail:</label><br>
-      <input type="email" name="email" required>
+      <label>Sigla:</label><br>
+      <input type="text" name="sigla" required>
+    </p>
+    <p>
+      <label>Carga Horária:</label><br>
+      <input type="number" name="carga" required>
     </p>
     <p>
       <input type="submit" value="Salvar">
-      <a href="listarTodos.php">Cancelar</a>
+      <a href="listarTodasDisciplinas.php">Cancelar</a>
     </p>
   </form>
 
   <?php
   if ($_POST)
   {
-    $matricula = $_POST['matricula'];
     $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $arquivo = fopen("alunos.txt", "r");
+    $sigla = $_POST['sigla'];
+    $carga = $_POST['carga'];
+    $arquivo = fopen("disciplinas.txt", "r");
     $existe = false;
     
-    fgets($arquivo); 
+    fgets($arquivo);
+    
     while(!feof($arquivo))
     {
       $linha = fgets($arquivo);
@@ -48,7 +48,7 @@
       {
         $dados = explode(";", $linha);
         
-        if($dados[0] == $matricula)
+        if($dados[1] == $sigla)
         {
           $existe = true;
           break;
@@ -59,16 +59,16 @@
     
     if($existe)
     {
-      echo "<p style='color: red;'>Erro: Matrícula já existe!</p>";
+      echo "<p style='color: red;'>Erro: Sigla já existe!</p>";
     }
     else
     {
-      $arquivo = fopen("alunos.txt", "a");
-      $novo_aluno = "\n$matricula;$nome;$email";
-      fwrite($arquivo, $novo_aluno);
+      $arquivo = fopen("disciplinas.txt", "a");
+      $nova_disciplina = "\n$nome;$sigla;$carga";
+      fwrite($arquivo, $nova_disciplina);
       fclose($arquivo);
       
-      header("Location: listarTodos.php");
+      header("Location: listarTodas.php");
     }
   }
   ?>
