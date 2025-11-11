@@ -1,0 +1,4 @@
+nome;sigla;carga
+3DAW - Desenvolvimento Web;3DAW;120
+1IHM - Interface Homem-Maquina;1IHM;80
+1FAC - Fundamento e Algoritmo da Computação;1FAC;120
