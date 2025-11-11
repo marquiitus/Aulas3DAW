@@ -1,0 +1,3 @@
+numPergunta;pergunta;alternativaA;alternativaB;alternativaC;alternativaD;alternativaE;alternativaGabarito
+1;Qual é a capital do Brasil?;Rio de Janeiro;Brasília;São Paulo;Salvador;Porto Alegre;B2;Porque o Daniel é gay?;porque ele é bicha;sla;verdade;eu ein;acho que não;A
+3;asdfadf;sdfsd;sfsdff;sdfsdf;sdfsdf;dfdf;B

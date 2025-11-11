@@ -1,0 +1,4 @@
+numPergunta;pergunta;respostaGabarito
+1;Explique o conceito de POO em até 50 palavras; Programação Orientada a Objetos é um paradigma baseado em objetos que contêm dados e métodos, com os pilares: encapsulamento, herança, polimorfismo e abstração.2;Porque as porras voam?;Porque elas voam e sla oq
+2;Mano para com isso;Fábio viado
+4;asdfasdf;sadfasdfasfas
