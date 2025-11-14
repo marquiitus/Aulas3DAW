@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Jogo Corporativo - Water Falls</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1>Sistema de Jogo Corporativo</h1>
+      <p>Water Falls - Treinamento para Gestores</p>
+    </div>
+  </header>
+  
+  <div class="container">
+    <section class="content-section text-center">
+      <h2>Bem-vindo ao Sistema de Treinamento</h2>
+      <p>Este sistema foi desenvolvido para treinar gestores em situações difíceis através de perguntas e respostas. Escolha uma das opções abaixo para começar.</p>
+    </section>
+    
+    <div class="menu-grid">
+      <div class="menu-card">
+        <h3>📝 Gerenciar Perguntas</h3>
+        <ul>
+          <li><a href="criarPerguntaMultipla.html">Criar Perguntas de Múltipla Escolha</a></li>
+          <li><a href="criarPerguntaTexto.html">Criar Perguntas de Texto</a></li>
+          <li><a href="alterarPerguntaMultipla.html">Alterar Perguntas de Múltipla Escolha</a></li>
+          <li><a href="alterarPerguntaTexto.html">Alterar Perguntas de Texto</a></li>
+        </ul>
+      </div>
+
+      <div class="menu-card">
+        <h3>👁️ Visualizar Perguntas</h3>
+        <ul>
+          <li><a href="listarPerguntasRespostas.html">Listar Todas as Perguntas</a></li>
+          <li><a href="listarPergunta.html">Buscar uma Pergunta</a></li>
+          <li><a href="excluirPerguntaResposta.html">Excluir Perguntas</a></li>
+        </ul>
+      </div>
+
+      <div class="menu-card">
+        <h3>👥 Gerenciar Usuários</h3>
+        <ul>
+          <li><a href="crudUsuarios.html">CRUD de Usuários</a></li>
+        </ul>
+      </div>
+
+      <div class="menu-card">
+        <h3>ℹ️ Sobre o Sistema</h3>
+        <ul>
+          <li><a href="#sobre" onclick="mostrarSobre()">Informações do Sistema</a></li>
+          <li><a href="#estatisticas" onclick="carregarEstatisticas()">Estatísticas</a></li>
+          <li><a href="#ajuda" onclick="mostrarAjuda()">Ajuda</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="sobre-section" class="content-section hidden">
+      <h2>Informações do Sistema</h2>
+      <div class="info-box">
+        <h4>Sistema de Jogo Corporativo Water Falls</h4>
+        <p><strong>Objetivo:</strong> Treinar gestores em situações difíceis através de perguntas e respostas encadeadas.</p>
+        <p><strong>Funcionalidades:</strong></p>
+        <ul>
+          <li>Cadastro de perguntas de múltipla escolha e texto</li>
+          <li>Gerenciamento completo de usuários</li>
+          <li>Sistema de busca e listagem de perguntas</li>
+          <li>Interface moderna e responsiva</li>
+        </ul>
+        <p><strong>Tecnologias:</strong> HTML5, CSS3, JavaScript, PHP, Arquivos TXT</p>
+      </div>
+    </div>
+
+    <div id="estatisticas-section" class="content-section hidden">
+      <h2>Estatísticas do Sistema</h2>
+      <div id="loading-estatisticas" class="loading">
+        <div class="spinner"></div>
+        <p>Carregando estatísticas...</p>
+      </div>
+      <div id="estatisticas-content" class="hidden">
+        <div class="menu-grid">
+          <div class="menu-card">
+            <h3>📊 Perguntas</h3>
+            <p id="total-multipla" class="text-center" style="font-size: 2rem; font-weight: bold; color: #3498db;">0</p>
+            <p class="text-center">Múltipla Escolha</p>
+          </div>
+          <div class="menu-card">
+            <h3>📝 Perguntas</h3>
+            <p id="total-texto" class="text-center" style="font-size: 2rem; font-weight: bold; color: #2ecc71;">0</p>
+            <p class="text-center">Texto</p>
+          </div>
+          <div class="menu-card">
+            <h3>👥 Usuários</h3>
+            <p id="total-usuarios" class="text-center" style="font-size: 2rem; font-weight: bold; color: #9b59b6;">0</p>
+            <p class="text-center">Cadastrados</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="ajuda-section" class="content-section hidden">
+      <h2>Ajuda e Suporte</h2>
+      <div class="info-box">
+        <h4>Como usar o sistema:</h4>
+        <p><strong>1. Criar Perguntas:</strong> Use os formulários específicos para cada tipo de pergunta.</p>
+        <p><strong>2. Gerenciar Perguntas:</strong> Edite ou exclua perguntas existentes conforme necessário.</p>
+        <p><strong>3. Visualizar:</strong> Liste todas as perguntas ou busque por uma específica.</p>
+        <p><strong>4. Usuários:</strong> Gerencie os usuários do sistema.</p>
+      </div>
+      <div class="warning-box">
+        <h4>Dúvidas Comuns:</h4>
+        <p><strong>Q:</strong> Posso alterar o tipo de uma pergunta?<br>
+           <strong>A:</strong> Não, você precisa excluir e criar uma nova com o tipo desejado.</p>
+        <p><strong>Q:</strong> Os dados são salvos automaticamente?<br>
+           <strong>A:</strong> Sim, todos os dados são persistidos em arquivos texto.</p>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+    <div class="container">
+      <p>Sistema de Jogo Corporativo &copy; 2025 - Water Falls</p>
+      <p>Desenvolvido para treinamento de gestores</p>
+    </div>
+  </footer>
+
+  <script>
+    function mostrarSobre() {
+      ocultarTodasSecoes();
+      document.getElementById('sobre-section').classList.remove('hidden');
+    }
+
+    function mostrarAjuda() {
+      ocultarTodasSecoes();
+      document.getElementById('ajuda-section').classList.remove('hidden');
+    }
+
+    function ocultarTodasSecoes() {
+      document.getElementById('sobre-section').classList.add('hidden');
+      document.getElementById('estatisticas-section').classList.add('hidden');
+      document.getElementById('ajuda-section').classList.add('hidden');
+    }
+
+    async function carregarEstatisticas() {
+      ocultarTodasSecoes();
+      const estatisticasSection = document.getElementById('estatisticas-section');
+      estatisticasSection.classList.remove('hidden');
+      
+      const loading = document.getElementById('loading-estatisticas');
+      const content = document.getElementById('estatisticas-content');
+      
+      loading.classList.remove('hidden');
+      content.classList.add('hidden');
+
+      try {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        document.getElementById('total-multipla').textContent = '12';
+        document.getElementById('total-texto').textContent = '8';
+        document.getElementById('total-usuarios').textContent = '5';
+        
+        loading.classList.add('hidden');
+        content.classList.remove('hidden');
+        
+      } catch (error) {
+        console.error('Erro ao carregar estatísticas:', error);
+        loading.innerHTML = '<p class="error">Erro ao carregar estatísticas</p>';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Sistema Water Falls carregado com sucesso!');
+      
+      const cards = document.querySelectorAll('.menu-card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
