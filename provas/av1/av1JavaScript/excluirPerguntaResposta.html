@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excluir Perguntas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header header-excluir">
+    <div class="container">
+      <h1>Excluir Perguntas</h1>
+      <p>Gerencie as perguntas do sistema</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="content-section">
+      <div id="perguntasList">
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Sistema de Perguntas e Respostas &copy; 2025</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function()
+    {
+      const perguntasList = document.getElementById('perguntasList');
+
+      function carregarPerguntas()
+      {
+        const perguntas = JSON.parse(localStorage.getItem('perguntas')) || [];
+        
+        if(perguntas.length === 0)
+        {
+          perguntasList.innerHTML = '<p class="empty-message">Nenhuma pergunta encontrada</p>';
+          return;
+        }
+
+        let html = '';
+        perguntas.forEach(pergunta =>
+        {
+          html += `
+            <div class="menu-card">
+              <h3>${pergunta.titulo}</h3>
+              <p>${pergunta.descricao}</p>
+              <p><strong>Tipo:</strong> ${pergunta.tipo}</p>
+              <p><strong>Data:</strong> ${new Date(pergunta.dataCriacao).toLocaleDateString()}</p>
+              <button onclick="excluirPergunta('${pergunta.id}')" class="btn btn-danger">Excluir</button>
+            </div>
+          `;
+        });
+
+        perguntasList.innerHTML = html;
+      }
+
+      window.excluirPergunta = function(id)
+      {
+        if(confirm('Tem certeza que deseja excluir esta pergunta?'))
+        {
+          const perguntas = JSON.parse(localStorage.getItem('perguntas')) || [];
+          const novasPerguntas = perguntas.filter(p => p.id !== id);
+          localStorage.setItem('perguntas', JSON.stringify(novasPerguntas));
+          carregarPerguntas();
+          alert('Pergunta excluída com sucesso!');
+        }
+      }
+
+      carregarPerguntas();
+    });
+  </script>
+</body>
+</html>

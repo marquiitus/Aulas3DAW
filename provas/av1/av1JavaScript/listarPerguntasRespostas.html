@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Perguntas e Respostas</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header header-perguntas">
+      <div class="container">
+        <h1>Perguntas e Respostas</h1>
+        <p>Encontre perguntas e compartilhe conhecimento</p>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="content-section">
+        <div class="search-form">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Buscar perguntas..."
+            class="form-group"
+          />
+        </div>
+
+        <div id="perguntasContainer" class="menu-grid">
+          <!-- As perguntas serão carregadas aqui via JavaScript -->
+        </div>
+
+        <div id="emptyState" class="empty-message hidden">
+          <h3>Nenhuma pergunta encontrada</h3>
+          <p>Seja o primeiro a fazer uma pergunta!</p>
+          <a href="criarPergunta.html" class="btn btn-success"
+            >Fazer Primeira Pergunta</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p>Sistema de Perguntas e Respostas &copy; 2025</p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const perguntasContainer =
+          document.getElementById("perguntasContainer");
+        const emptyState = document.getElementById("emptyState");
+        const searchInput = document.getElementById("searchInput");
+
+        function carregarPerguntas(termoBusca = "") {
+          const perguntas = JSON.parse(localStorage.getItem("perguntas")) || [];
+
+          // Filtrar perguntas se houver termo de busca
+          const perguntasFiltradas = perguntas.filter(
+            (pergunta) =>
+              pergunta.titulo
+                .toLowerCase()
+                .includes(termoBusca.toLowerCase()) ||
+              pergunta.descricao
+                .toLowerCase()
+                .includes(termoBusca.toLowerCase())
+          );
+
+          if (perguntasFiltradas.length === 0) {
+            perguntasContainer.classList.add("hidden");
+            emptyState.classList.remove("hidden");
+            return;
+          }
+
+          perguntasContainer.classList.remove("hidden");
+          emptyState.classList.add("hidden");
+          perguntasContainer.innerHTML = "";
+
+          // Ordenar por data (mais recentes primeiro)
+          perguntasFiltradas.sort(
+            (a, b) => new Date(b.dataCriacao) - new Date(a.dataCriacao)
+          );
+
+          perguntasFiltradas.forEach((pergunta, index) => {
+            const perguntaCard = document.createElement("div");
+            perguntaCard.className = "menu-card";
+            perguntaCard.style.cursor = "pointer";
+
+            const descricaoResumida =
+              pergunta.descricao.length > 150
+                ? pergunta.descricao.substring(0, 150) + "..."
+                : pergunta.descricao;
+
+            const respostasCount = pergunta.respostas
+              ? pergunta.respostas.length
+              : 0;
+
+            perguntaCard.innerHTML = `
+                        <h3>${pergunta.titulo}</h3>
+                        <p style="margin-bottom: 15px; color: #666;">${descricaoResumida}</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; color: #888; border-top: 1px solid #eee; padding-top: 10px;">
+                            <span>${new Date(
+                              pergunta.dataCriacao
+                            ).toLocaleDateString()}</span>
+                            <span class="respostas-count" style="background-color: #3498db; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;">
+                                ${respostasCount} resposta${
+              respostasCount !== 1 ? "s" : ""
+            }
+                            </span>
+                        </div>
+                    `;
+
+            perguntaCard.addEventListener("click", () => {
+              window.location.href = `listarPergunta.html?id=${pergunta.id}`;
+            });
+
+            perguntasContainer.appendChild(perguntaCard);
+          });
+        }
+
+        // Carregar perguntas inicialmente
+        carregarPerguntas();
+
+        // Adicionar busca em tempo real
+        searchInput.addEventListener("input", function () {
+          carregarPerguntas(this.value);
+        });
+      });
+    </script>
+  </body>
+</html>

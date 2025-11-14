@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Pergunta Múltipla Escolha</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header header-multipla">
+    <div class="container">
+      <h1>Criar Pergunta Múltipla Escolha</h1>
+      <p>Adicione uma nova pergunta com opções de resposta</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="content-section">
+      <form id="perguntaMultiplaForm" class="form-container">
+        <div class="form-group">
+          <label for="titulo">Título da Pergunta</label>
+          <input type="text" id="titulo" required>
+        </div>
+
+        <div class="form-group">
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Alternativas</label>
+          <div id="alternativasContainer">
+            <div class="alternative-item">
+              <input type="text" placeholder="Alternativa 1" class="alternativa-input" required>
+            </div>
+            <div class="alternative-item">
+              <input type="text" placeholder="Alternativa 2" class="alternativa-input" required>
+            </div>
+          </div>
+          <button type="button" id="addAlternativa" class="btn btn-secondary">Adicionar Alternativa</button>
+        </div>
+
+        <div class="form-group">
+          <label for="respostaCorreta">Resposta Correta</label>
+          <select id="respostaCorreta" required>
+            <option value="">Selecione a alternativa correta</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Criar Pergunta</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Sistema de Perguntas e Respostas &copy; 2025</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function()
+    {
+      const form = document.getElementById('perguntaMultiplaForm');
+      const addButton = document.getElementById('addAlternativa');
+      const alternativasContainer = document.getElementById('alternativasContainer');
+      const respostaCorretaSelect = document.getElementById('respostaCorreta');
+      let alternativaCount = 2;
+
+      function atualizarRespostaCorreta()
+      {
+        respostaCorretaSelect.innerHTML = '<option value="">Selecione a alternativa correta</option>';
+        const inputs = document.querySelectorAll('.alternativa-input');
+        
+        inputs.forEach((input, index) =>
+        {
+          const option = document.createElement('option');
+          option.value = index;
+          option.textContent = `Alternativa ${index + 1}`;
+          respostaCorretaSelect.appendChild(option);
+        });
+      }
+
+      addButton.addEventListener('click', function()
+      {
+        alternativaCount++;
+        const newDiv = document.createElement('div');
+        newDiv.className = 'alternative-item';
+        newDiv.innerHTML = `<input type="text" placeholder="Alternativa ${alternativaCount}" class="alternativa-input" required>`;
+        alternativasContainer.appendChild(newDiv);
+        atualizarRespostaCorreta();
+      });
+
+      form.addEventListener('submit', function(e)
+      {
+        e.preventDefault();
+        
+        const titulo = document.getElementById('titulo').value;
+        const descricao = document.getElementById('descricao').value;
+        const respostaCorreta = document.getElementById('respostaCorreta').value;
+        
+        if(respostaCorreta === "")
+        {
+          alert('Selecione a resposta correta');
+          return;
+        }
+
+        const alternativas = [];
+        const inputs = document.querySelectorAll('.alternativa-input');
+        
+        inputs.forEach(input =>
+        {
+          alternativas.push(input.value);
+        });
+
+        const perguntas = JSON.parse(localStorage.getItem('perguntas')) || [];
+        
+        const novaPergunta = 
+        {
+          id: Date.now().toString(),
+          tipo: 'multipla',
+          titulo: titulo,
+          descricao: descricao,
+          alternativas: alternativas,
+          respostaCorreta: parseInt(respostaCorreta),
+          dataCriacao: new Date().toISOString(),
+          respostas: []
+        };
+
+        perguntas.push(novaPergunta);
+        localStorage.setItem('perguntas', JSON.stringify(perguntas));
+        
+        alert('Pergunta criada com sucesso!');
+        form.reset();
+        
+        const alternativaInputs = document.querySelectorAll('.alternativa-input');
+        alternativaInputs.forEach((input, index) =>
+        {
+          if(index >= 2)
+          {
+            input.parentElement.remove();
+          }
+        });
+        
+        alternativaCount = 2;
+        atualizarRespostaCorreta();
+      });
+
+      atualizarRespostaCorreta();
+    });
+  </script>
+</body>
+</html>

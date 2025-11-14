@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alterar Pergunta de Texto</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header header-texto">
+    <div class="container">
+      <h1>Alterar Pergunta de Texto</h1>
+      <p>Edite os dados da pergunta</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="content-section">
+      <form id="perguntaTextoForm" class="form-container">
+        <div class="form-group">
+          <label for="titulo">Título da Pergunta</label>
+          <input type="text" id="titulo" required>
+        </div>
+
+        <div class="form-group">
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="respostaEsperada">Resposta Esperada (Opcional)</label>
+          <textarea id="respostaEsperada"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">Salvar Alterações</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Sistema de Perguntas e Respostas &copy; 2025</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function()
+    {
+      const urlParams = new URLSearchParams(window.location.search);
+      const perguntaId = urlParams.get('id');
+      
+      if(!perguntaId)
+      {
+        alert('Pergunta não encontrada');
+        window.location.href = 'listarPerguntasRespostas.html';
+        return;
+      }
+
+      const perguntas = JSON.parse(localStorage.getItem('perguntas')) || [];
+      const perguntaIndex = perguntas.findIndex(p => p.id === perguntaId);
+      
+      if(perguntaIndex === -1 || perguntas[perguntaIndex].tipo !== 'texto')
+      {
+        alert('Pergunta não encontrada');
+        window.location.href = 'listarPerguntasRespostas.html';
+        return;
+      }
+
+      const pergunta = perguntas[perguntaIndex];
+      const form = document.getElementById('perguntaTextoForm');
+
+      document.getElementById('titulo').value = pergunta.titulo;
+      document.getElementById('descricao').value = pergunta.descricao;
+      document.getElementById('respostaEsperada').value = pergunta.respostaEsperada || '';
+
+      form.addEventListener('submit', function(e)
+      {
+        e.preventDefault();
+        
+        const titulo = document.getElementById('titulo').value;
+        const descricao = document.getElementById('descricao').value;
+        const respostaEsperada = document.getElementById('respostaEsperada').value;
+
+        perguntas[perguntaIndex].titulo = titulo;
+        perguntas[perguntaIndex].descricao = descricao;
+        perguntas[perguntaIndex].respostaEsperada = respostaEsperada;
+
+        localStorage.setItem('perguntas', JSON.stringify(perguntas));
+        
+        alert('Pergunta alterada com sucesso!');
+        window.location.href = 'listarPerguntasRespostas.html';
+      });
+    });
+  </script>
+</body>
+</html>

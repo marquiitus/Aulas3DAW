@@ -238,7 +238,8 @@ table {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-th, td {
+th,
+td {
   border: 1px solid #e1e1e1;
   padding: 12px 15px;
   text-align: left;
@@ -372,8 +373,13 @@ tr:hover {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .empty-message {
@@ -395,20 +401,20 @@ tr:hover {
   .menu-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .header h1 {
     font-size: 2rem;
   }
-  
+
   table {
     display: block;
     overflow-x: auto;
   }
-  
+
   .container {
     padding: 10px;
   }
-  
+
   .content-section {
     padding: 15px;
   }
@@ -418,14 +424,14 @@ tr:hover {
   .header h1 {
     font-size: 1.5rem;
   }
-  
+
   .btn {
     padding: 10px 15px;
     font-size: 0.9rem;
     width: 100%;
     margin-bottom: 10px;
   }
-  
+
   .actions a {
     display: block;
     margin-bottom: 5px;
@@ -470,4 +476,136 @@ tr:hover {
   background-color: #fff3cd;
   padding: 2px 4px;
   border-radius: 2px;
+}
+
+/* Estilos específicos para as páginas de perguntas e respostas */
+
+/* Header específico para páginas de perguntas */
+.header-perguntas {
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+}
+
+.header-pergunta-detalhe {
+  background: linear-gradient(135deg, #2c3e50, #2ecc71);
+}
+
+/* Cards de perguntas na lista */
+.pergunta-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  border-left: 4px solid #3498db;
+}
+
+.pergunta-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Contador de respostas */
+.respostas-count {
+  background-color: #3498db;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+/* Layout para lista de perguntas */
+.perguntas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Itens de resposta */
+.resposta-item {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-left: 4px solid #2ecc71;
+}
+
+/* Estados vazios */
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.empty-state p {
+  margin-bottom: 20px;
+}
+
+/* Formulário de resposta */
+.form-resposta {
+  margin-top: 30px;
+}
+
+/* Detalhes da pergunta */
+.pergunta-detalhes {
+  margin-bottom: 30px;
+}
+
+.pergunta-titulo {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.pergunta-descricao {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.pergunta-meta {
+  display: flex;
+  justify-content: space-between;
+  color: #888;
+  font-size: 0.9rem;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+/* Seção de respostas */
+.respostas-section {
+  margin-top: 30px;
+}
+
+.respostas-header {
+  font-size: 1.4rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eee;
+}
+
+.resposta-texto {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.resposta-meta {
+  display: flex;
+  justify-content: space-between;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* Link de voltar */
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #3498db;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
 }

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalhes da Pergunta</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header header-pergunta-detalhe">
+      <div class="container">
+        <h1>Detalhes da Pergunta</h1>
+        <p>Veja a pergunta e as respostas, ou contribua com a sua</p>
+      </div>
+    </header>
+
+    <div class="container">
+      <a
+        href="listarPerguntasRespostas.html"
+        class="btn btn-secondary"
+        style="margin-bottom: 20px"
+        >← Voltar para a lista</a
+      >
+
+      <div id="perguntaContainer">
+        <!-- Os detalhes da pergunta serão carregados aqui -->
+      </div>
+
+      <div id="respostasContainer" class="content-section">
+        <h2>Respostas</h2>
+        <div id="respostasList">
+          <!-- As respostas serão carregadas aqui -->
+        </div>
+      </div>
+
+      <div class="content-section">
+        <h3>Sua Resposta</h3>
+        <form id="respostaForm" class="form-container">
+          <div class="form-group">
+            <label for="respostaTexto">Digite sua resposta:</label>
+            <textarea id="respostaTexto" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-success">Enviar Resposta</button>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p>Sistema de Perguntas e Respostas &copy; 2025</p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const perguntaId = urlParams.get("id");
+
+        const perguntaContainer = document.getElementById("perguntaContainer");
+        const respostasList = document.getElementById("respostasList");
+        const respostaForm = document.getElementById("respostaForm");
+        const respostasContainer =
+          document.getElementById("respostasContainer");
+
+        function carregarPergunta() {
+          const perguntas = JSON.parse(localStorage.getItem("perguntas")) || [];
+          const pergunta = perguntas.find((p) => p.id === perguntaId);
+
+          if (!pergunta) {
+            perguntaContainer.innerHTML = `
+                        <div class="content-section text-center">
+                            <h2>Pergunta não encontrada</h2>
+                            <p>A pergunta que você está tentando acessar não existe.</p>
+                            <a href="listarPerguntasRespostas.html" class="btn btn-success" style="margin-top: 20px;">Voltar para a lista</a>
+                        </div>
+                    `;
+            document.querySelector(
+              ".content-section:last-child"
+            ).style.display = "none";
+            respostasContainer.style.display = "none";
+            return;
+          }
+
+          // Exibir detalhes da pergunta
+          perguntaContainer.innerHTML = `
+                    <div class="content-section">
+                        <h2>${pergunta.titulo}</h2>
+                        <div style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; color: #555;">
+                            ${pergunta.descricao}
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; color: #888; font-size: 0.9rem; border-top: 1px solid #eee; padding-top: 15px;">
+                            <span>Pergunta feita em ${new Date(
+                              pergunta.dataCriacao
+                            ).toLocaleDateString()}</span>
+                            <span>${
+                              pergunta.respostas ? pergunta.respostas.length : 0
+                            } respostas</span>
+                        </div>
+                    </div>
+                `;
+
+          // Exibir respostas
+          carregarRespostas(pergunta);
+        }
+
+        function carregarRespostas(pergunta) {
+          if (!pergunta.respostas || pergunta.respostas.length === 0) {
+            respostasList.innerHTML = `
+                        <div class="empty-message">
+                            <p>Nenhuma resposta ainda. Seja o primeiro a responder!</p>
+                        </div>
+                    `;
+            return;
+          }
+
+          respostasList.innerHTML = "";
+
+          // Ordenar respostas por data (mais recentes primeiro)
+          pergunta.respostas.sort(
+            (a, b) => new Date(b.dataCriacao) - new Date(a.dataCriacao)
+          );
+
+          pergunta.respostas.forEach((resposta) => {
+            const respostaItem = document.createElement("div");
+            respostaItem.className = "alternative-item";
+            respostaItem.style.marginBottom = "15px";
+            respostaItem.innerHTML = `
+                        <div style="margin-bottom: 10px; line-height: 1.6;">${
+                          resposta.texto
+                        }</div>
+                        <div style="display: flex; justify-content: space-between; color: #888; font-size: 0.9rem;">
+                            <span>Respondido em ${new Date(
+                              resposta.dataCriacao
+                            ).toLocaleDateString()}</span>
+                        </div>
+                    `;
+            respostasList.appendChild(respostaItem);
+          });
+        }
+
+        respostaForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const respostaTexto = document
+            .getElementById("respostaTexto")
+            .value.trim();
+
+          if (!respostaTexto) {
+            alert("Por favor, digite uma resposta.");
+            return;
+          }
+
+          const perguntas = JSON.parse(localStorage.getItem("perguntas")) || [];
+          const perguntaIndex = perguntas.findIndex((p) => p.id === perguntaId);
+
+          if (perguntaIndex === -1) {
+            alert("Pergunta não encontrada.");
+            return;
+          }
+
+          // Inicializar array de respostas se não existir
+          if (!perguntas[perguntaIndex].respostas) {
+            perguntas[perguntaIndex].respostas = [];
+          }
+
+          // Adicionar nova resposta
+          const novaResposta = {
+            id: Date.now().toString(),
+            texto: respostaTexto,
+            dataCriacao: new Date().toISOString(),
+          };
+
+          perguntas[perguntaIndex].respostas.push(novaResposta);
+          localStorage.setItem("perguntas", JSON.stringify(perguntas));
+
+          // Limpar formulário e recarregar respostas
+          document.getElementById("respostaTexto").value = "";
+          carregarRespostas(perguntas[perguntaIndex]);
+
+          // Atualizar contador de respostas na pergunta
+          const contadorRespostas = perguntaContainer.querySelector(
+            ".content-section div:last-child span:last-child"
+          );
+          contadorRespostas.textContent = `${perguntas[perguntaIndex].respostas.length} respostas`;
+
+          // Mostrar mensagem de sucesso
+          alert("Resposta enviada com sucesso!");
+        });
+
+        carregarPergunta();
+      });
+    </script>
+  </body>
+</html>

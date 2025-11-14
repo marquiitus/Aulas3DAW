@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alterar Pergunta Múltipla Escolha</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header header-multipla">
+    <div class="container">
+      <h1>Alterar Pergunta Múltipla Escolha</h1>
+      <p>Edite os dados da pergunta</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="content-section">
+      <form id="perguntaMultiplaForm" class="form-container">
+        <div class="form-group">
+          <label for="titulo">Título da Pergunta</label>
+          <input type="text" id="titulo" required>
+        </div>
+
+        <div class="form-group">
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Alternativas</label>
+          <div id="alternativasContainer">
+          </div>
+          <button type="button" id="addAlternativa" class="btn btn-secondary">Adicionar Alternativa</button>
+        </div>
+
+        <div class="form-group">
+          <label for="respostaCorreta">Resposta Correta</label>
+          <select id="respostaCorreta" required>
+            <option value="">Selecione a alternativa correta</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Salvar Alterações</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Sistema de Perguntas e Respostas &copy; 2025</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function()
+    {
+      const urlParams = new URLSearchParams(window.location.search);
+      const perguntaId = urlParams.get('id');
+      
+      if(!perguntaId)
+      {
+        alert('Pergunta não encontrada');
+        window.location.href = 'listarPerguntasRespostas.html';
+        return;
+      }
+
+      const perguntas = JSON.parse(localStorage.getItem('perguntas')) || [];
+      const perguntaIndex = perguntas.findIndex(p => p.id === perguntaId);
+      
+      if(perguntaIndex === -1 || perguntas[perguntaIndex].tipo !== 'multipla')
+      {
+        alert('Pergunta não encontrada');
+        window.location.href = 'listarPerguntasRespostas.html';
+        return;
+      }
+
+      const pergunta = perguntas[perguntaIndex];
+      const form = document.getElementById('perguntaMultiplaForm');
+      const addButton = document.getElementById('addAlternativa');
+      const alternativasContainer = document.getElementById('alternativasContainer');
+      const respostaCorretaSelect = document.getElementById('respostaCorreta');
+
+      document.getElementById('titulo').value = pergunta.titulo;
+      document.getElementById('descricao').value = pergunta.descricao;
+
+      function carregarAlternativas()
+      {
+        alternativasContainer.innerHTML = '';
+        pergunta.alternativas.forEach((alternativa, index) =>
+        {
+          const div = document.createElement('div');
+          div.className = 'alternative-item';
+          div.innerHTML = `<input type="text" value="${alternativa}" class="alternativa-input" required>`;
+          alternativasContainer.appendChild(div);
+        });
+        atualizarRespostaCorreta();
+      }
+
+      function atualizarRespostaCorreta()
+      {
+        respostaCorretaSelect.innerHTML = '<option value="">Selecione a alternativa correta</option>';
+        const inputs = document.querySelectorAll('.alternativa-input');
+        
+        inputs.forEach((input, index) =>
+        {
+          const option = document.createElement('option');
+          option.value = index;
+          option.textContent = `Alternativa ${index + 1}`;
+          if(index === pergunta.respostaCorreta)
+          {
+            option.selected = true;
+          }
+          respostaCorretaSelect.appendChild(option);
+        });
+      }
+
+      addButton.addEventListener('click', function()
+      {
+        const div = document.createElement('div');
+        div.className = 'alternative-item';
+        div.innerHTML = `<input type="text" placeholder="Nova alternativa" class="alternativa-input" required>`;
+        alternativasContainer.appendChild(div);
+        atualizarRespostaCorreta();
+      });
+
+      form.addEventListener('submit', function(e)
+      {
+        e.preventDefault();
+        
+        const titulo = document.getElementById('titulo').value;
+        const descricao = document.getElementById('descricao').value;
+        const respostaCorreta = document.getElementById('respostaCorreta').value;
+        
+        if(respostaCorreta === "")
+        {
+          alert('Selecione a resposta correta');
+          return;
+        }
+
+        const alternativas = [];
+        const inputs = document.querySelectorAll('.alternativa-input');
+        
+        inputs.forEach(input =>
+        {
+          alternativas.push(input.value);
+        });
+
+        perguntas[perguntaIndex].titulo = titulo;
+        perguntas[perguntaIndex].descricao = descricao;
+        perguntas[perguntaIndex].alternativas = alternativas;
+        perguntas[perguntaIndex].respostaCorreta = parseInt(respostaCorreta);
+
+        localStorage.setItem('perguntas', JSON.stringify(perguntas));
+        
+        alert('Pergunta alterada com sucesso!');
+        window.location.href = 'listarPerguntasRespostas.html';
+      });
+
+      carregarAlternativas();
+    });
+  </script>
+</body>
+</html>

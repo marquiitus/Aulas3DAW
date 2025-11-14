@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Pergunta de Texto</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header header-texto">
+    <div class="container">
+      <h1>Criar Pergunta de Texto</h1>
+      <p>Adicione uma nova pergunta com resposta em texto livre</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="content-section">
+      <form id="perguntaTextoForm" class="form-container">
+        <div class="form-group">
+          <label for="titulo">Título da Pergunta</label>
+          <input type="text" id="titulo" required>
+        </div>
+
+        <div class="form-group">
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="respostaEsperada">Resposta Esperada (Opcional)</label>
+          <textarea id="respostaEsperada"></textarea>
+          <small>Esta resposta não será mostrada aos usuários, apenas para referência</small>
+        </div>
+
+        <button type="submit" class="btn btn-success">Criar Pergunta</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Sistema de Perguntas e Respostas &copy; 2025</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function()
+    {
+      const form = document.getElementById('perguntaTextoForm');
+
+      form.addEventListener('submit', function(e)
+      {
+        e.preventDefault();
+        
+        const titulo = document.getElementById('titulo').value;
+        const descricao = document.getElementById('descricao').value;
+        const respostaEsperada = document.getElementById('respostaEsperada').value;
+
+        const perguntas = JSON.parse(localStorage.getItem('perguntas')) || [];
+        
+        const novaPergunta = 
+        {
+          id: Date.now().toString(),
+          tipo: 'texto',
+          titulo: titulo,
+          descricao: descricao,
+          respostaEsperada: respostaEsperada,
+          dataCriacao: new Date().toISOString(),
+          respostas: []
+        };
+
+        perguntas.push(novaPergunta);
+        localStorage.setItem('perguntas', JSON.stringify(perguntas));
+        
+        alert('Pergunta criada com sucesso!');
+        form.reset();
+      });
+    });
+  </script>
+</body>
+</html>

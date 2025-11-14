@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciar Usuários</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header header-usuarios">
+    <div class="container">
+      <h1>Gerenciar Usuários</h1>
+      <p>Cadastre e gerencie os usuários do sistema</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="content-section">
+      <h2>Adicionar Novo Usuário</h2>
+      <form id="usuarioForm" class="form-container">
+        <div class="form-group">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="tipo">Tipo de Usuário</label>
+          <select id="tipo" required>
+            <option value="aluno">Aluno</option>
+            <option value="professor">Professor</option>
+            <option value="admin">Administrador</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Cadastrar Usuário</button>
+      </form>
+    </div>
+
+    <div class="content-section">
+      <h2>Usuários Cadastrados</h2>
+      <div id="usuariosList">
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Sistema de Perguntas e Respostas &copy; 2025</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function()
+    {
+      const form = document.getElementById('usuarioForm');
+      const usuariosList = document.getElementById('usuariosList');
+
+      function carregarUsuarios()
+      {
+        const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+        
+        if(usuarios.length === 0)
+        {
+          usuariosList.innerHTML = '<p class="empty-message">Nenhum usuário cadastrado</p>';
+          return;
+        }
+
+        let html = '<div class="menu-grid">';
+        usuarios.forEach(usuario =>
+        {
+          html += `
+            <div class="menu-card">
+              <h3>${usuario.nome}</h3>
+              <p><strong>Email:</strong> ${usuario.email}</p>
+              <p><strong>Tipo:</strong> ${usuario.tipo}</p>
+              <button onclick="editarUsuario('${usuario.id}')" class="btn btn-edit">Editar</button>
+              <button onclick="excluirUsuario('${usuario.id}')" class="btn btn-danger">Excluir</button>
+            </div>
+          `;
+        });
+        html += '</div>';
+
+        usuariosList.innerHTML = html;
+      }
+
+      form.addEventListener('submit', function(e)
+      {
+        e.preventDefault();
+        
+        const nome = document.getElementById('nome').value;
+        const email = document.getElementById('email').value;
+        const tipo = document.getElementById('tipo').value;
+
+        const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+        
+        const usuarioExistente = usuarios.find(u => u.email === email);
+        if(usuarioExistente)
+        {
+          alert('Já existe um usuário com este email!');
+          return;
+        }
+
+        const novoUsuario = 
+        {
+          id: Date.now().toString(),
+          nome: nome,
+          email: email,
+          tipo: tipo,
+          dataCadastro: new Date().toISOString()
+        };
+
+        usuarios.push(novoUsuario);
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        
+        alert('Usuário cadastrado com sucesso!');
+        form.reset();
+        carregarUsuarios();
+      });
+
+      window.editarUsuario = function(id)
+      {
+        const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+        const usuario = usuarios.find(u => u.id === id);
+        
+        if(usuario)
+        {
+          const novoNome = prompt('Novo nome:', usuario.nome);
+          const novoTipo = prompt('Novo tipo (aluno/professor/admin):', usuario.tipo);
+          
+          if(novoNome && novoTipo)
+          {
+            usuario.nome = novoNome;
+            usuario.tipo = novoTipo;
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+            carregarUsuarios();
+            alert('Usuário atualizado com sucesso!');
+          }
+        }
+      }
+
+      window.excluirUsuario = function(id)
+      {
+        if(confirm('Tem certeza que deseja excluir este usuário?'))
+        {
+          const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+          const novosUsuarios = usuarios.filter(u => u.id !== id);
+          localStorage.setItem('usuarios', JSON.stringify(novosUsuarios));
+          carregarUsuarios();
+          alert('Usuário excluído com sucesso!');
+        }
+      }
+
+      carregarUsuarios();
+    });
+  </script>
+</body>
+</html>
