@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alterar Pergunta Múltipla Escolha</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header header-multipla">
+    <div class="container">
+      <h1>Alterar Pergunta Múltipla Escolha</h1>
+      <p>Busque e edite perguntas do sistema</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="content-section">
+      <h2>Buscar Pergunta</h2>
+      <div class="form-container">
+        <div class="form-group">
+          <label for="codigoPergunta">Código da Pergunta</label>
+          <input type="number" id="codigoPergunta" required>
+        </div>
+        <button onclick="buscarPergunta()" class="btn">Buscar Pergunta</button>
+      </div>
+    </div>
+
+    <div id="formEdicao" class="content-section" style="display: none;">
+      <h2>Editar Pergunta</h2>
+      <form id="formPergunta" class="form-container">
+        <div class="form-group">
+          <label for="pergunta">Pergunta</label>
+          <textarea id="pergunta" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Alternativas</label>
+          <div class="alternatives-grid">
+            <div class="alternative-item">
+              <input type="text" id="alternativaA" placeholder="Alternativa A" required>
+            </div>
+            <div class="alternative-item">
+              <input type="text" id="alternativaB" placeholder="Alternativa B" required>
+            </div>
+            <div class="alternative-item">
+              <input type="text" id="alternativaC" placeholder="Alternativa C" required>
+            </div>
+            <div class="alternative-item">
+              <input type="text" id="alternativaD" placeholder="Alternativa D" required>
+            </div>
+            <div class="alternative-item">
+              <input type="text" id="alternativaE" placeholder="Alternativa E" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="alternativaGabarito">Alternativa Correta</label>
+          <select id="alternativaGabarito" required>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+          </select>
+        </div>
+
+        <button type="button" onclick="salvarPergunta()" class="btn btn-success">Salvar Alterações</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Sistema de Perguntas e Respostas &copy; 2025</p>
+    </div>
+  </footer>
+
+  <script>
+    function buscarPergunta()
+    {
+      const codigo = document.getElementById('codigoPergunta').value;
+      
+      if(!codigo)
+      {
+        alert('Digite o código da pergunta');
+        return;
+      }
+
+      fetch('buscarPerguntaMultipla.php?codigo=' + codigo)
+      .then(response => response.json())
+      .then(data =>
+      {
+        if(data.erro)
+        {
+          alert(data.erro);
+          return;
+        }
+
+        document.getElementById('pergunta').value = data.pergunta;
+        document.getElementById('alternativaA').value = data.alternativaA;
+        document.getElementById('alternativaB').value = data.alternativaB;
+        document.getElementById('alternativaC').value = data.alternativaC;
+        document.getElementById('alternativaD').value = data.alternativaD;
+        document.getElementById('alternativaE').value = data.alternativaE;
+        document.getElementById('alternativaGabarito').value = data.alternativaGabarito;
+
+        document.getElementById('formEdicao').style.display = 'block';
+      })
+      .catch(error =>
+      {
+        alert('Erro ao buscar pergunta');
+      });
+    }
+
+    function salvarPergunta()
+    {
+      const codigo = document.getElementById('codigoPergunta').value;
+      const pergunta = document.getElementById('pergunta').value;
+      const alternativaA = document.getElementById('alternativaA').value;
+      const alternativaB = document.getElementById('alternativaB').value;
+      const alternativaC = document.getElementById('alternativaC').value;
+      const alternativaD = document.getElementById('alternativaD').value;
+      const alternativaE = document.getElementById('alternativaE').value;
+      const alternativaGabarito = document.getElementById('alternativaGabarito').value;
+
+      const dados = 
+      {
+        codigo: codigo,
+        pergunta: pergunta,
+        alternativaA: alternativaA,
+        alternativaB: alternativaB,
+        alternativaC: alternativaC,
+        alternativaD: alternativaD,
+        alternativaE: alternativaE,
+        alternativaGabarito: alternativaGabarito
+      };
+
+      fetch('salvarPerguntaMultipla.php',
+      {
+        method: 'POST',
+        headers: 
+        {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+      })
+      .then(response => response.json())
+      .then(data =>
+      {
+        if(data.sucesso)
+        {
+          alert('Pergunta alterada com sucesso!');
+        }
+        else
+        {
+          alert('Erro ao salvar: ' + data.erro);
+        }
+      })
+      .catch(error =>
+      {
+        alert('Erro ao salvar pergunta');
+      });
+    }
+  </script>
+</body>
+</html>
