@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS sistema_login;
-USE sistema_login;
+CREATE DATABASE IF NOT EXISTS santa_teresa;
+USE santa_teresa;
 
 CREATE TABLE IF NOT EXISTS usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
