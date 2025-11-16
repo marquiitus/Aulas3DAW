@@ -1,38 +1,55 @@
 <?php
+session_start();
 include 'conexao.php';
 
-header('Content-Type: application/json');
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+  $nome = trim($_POST['nome']);
+  $endereco = trim($_POST['endereco']);
+  $email = trim($_POST['email']);
+  $telefone = trim($_POST['telefone']);
+  $passaporte = trim($_POST['passaporte']);
+  $nacionalidade = trim($_POST['nacionalidade']);
+  $senha = $_POST['senha'];
+  $confirmar_senha = $_POST['confirmar_senha'];
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nome = $_POST['nome'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $senha = $_POST['senha'] ?? '';
+  $campos_obrigatorios = ['nome', 'endereco', 'email', 'passaporte', 'nacionalidade', 'senha'];
+  foreach ($campos_obrigatorios as $campo)
+  {
+    if (empty($_POST[$campo]))
+    {
+      header('Location: ../cadastro.html?erro=' . urlencode("Todos os campos marcados com * são obrigatórios!"));
+      exit;
+    }
+  }
+
+  if ($senha !== $confirmar_senha)
+  {
+    header('Location: ../cadastro.html?erro=' . urlencode("As senhas não coincidem!"));
+    exit;
+  }
+
+  try
+  {
+    $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = ? OR passaporte = ?");
+    $stmt->execute([$email, $passaporte]);
     
-    if (empty($nome) || empty($email) || empty($senha)) {
-        echo json_encode(['success' => false, 'message' => 'Por favor, preencha todos os campos.']);
-        exit;
+    if ($stmt->rowCount() > 0)
+    {
+      header('Location: ../cadastro.html?erro=' . urlencode("Este email ou número de passaporte já está cadastrado!"));
+      exit;
     }
     
-    try {
-        // Verificar se email já existe
-        $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = ?");
-        $stmt->execute([$email]);
-        
-        if ($stmt->fetch()) {
-            echo json_encode(['success' => false, 'message' => 'Este e-mail já está cadastrado.']);
-            exit;
-        }
-        
-        // Inserir novo usuário
-        $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-        $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)");
-        $stmt->execute([$nome, $email, $senhaHash]);
-        
-        echo json_encode(['success' => true, 'message' => 'Cadastro realizado com sucesso!']);
-    } catch (PDOException $e) {
-        echo json_encode(['success' => false, 'message' => 'Erro no servidor. Tente novamente.']);
-    }
-} else {
-    echo json_encode(['success' => false, 'message' => 'Método não permitido.']);
+    $stmt = $pdo->prepare("INSERT INTO usuarios (nome, endereco, email, telefone, passaporte, nacionalidade, senha) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$nome, $endereco, $email, $telefone, $passaporte, $nacionalidade, $senha]);
+
+    header('Location: ../login.html?sucesso=' . urlencode("Cadastro realizado com sucesso! Faça login."));
+    exit;
+  }
+  catch (PDOException $e)
+  {
+    header('Location: ../cadastro.html?erro=' . urlencode("Erro ao cadastrar: " . $e->getMessage()));
+    exit;
+  }
 }
 ?>

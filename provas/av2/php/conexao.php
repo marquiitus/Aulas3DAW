@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'sistema_login';
+$dbname = 'santa_teresa';
 $username = 'root';
 $password = '';
 
