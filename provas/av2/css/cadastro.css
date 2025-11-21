@@ -1,0 +1,264 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: #EFEDEA;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(3, 13, 79, 0.1);
+  overflow: hidden;
+  border: 2px solid #CEECEF;
+}
+
+.header {
+  background: #030D4F;
+  padding: 25px 20px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.logo a {
+  color: #FFC52C;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 10px;
+}
+
+.nav-links a {
+  color: #CEECEF;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.nav-links a:hover {
+  color: #FFC52C;
+}
+
+.main-content {
+  padding: 40px 30px;
+}
+
+.form-container {
+  width: 100%;
+}
+
+.form-container h2 {
+  text-align: center;
+  color: #030D4F;
+  font-size: 32px;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+#message-container {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  color: #030D4F;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 15px 20px;
+  border: 2px solid #CEECEF;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+  color: #030D4F;
+  font-family: 'Arial', sans-serif;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #FBC006;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(251, 192, 6, 0.1);
+}
+
+.form-group textarea {
+  height: 80px;
+  resize: vertical;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #FBC006, #FFC52C);
+  color: #030D4F;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(251, 192, 6, 0.3);
+  margin-top: 10px;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #FFC52C, #FBC006);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(251, 192, 6, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.links {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #CEECEF;
+}
+
+.links a {
+  color: #030D4F;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid #FFC52C;
+  padding-bottom: 2px;
+}
+
+.links a:hover {
+  color: #FBC006;
+  border-bottom-color: #FBC006;
+}
+
+.sobre-nos-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+}
+
+.sobre-nos-link .sobre {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sobre-nos-link .nos {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 2px;
+  line-height: 1;
+}
+
+.message {
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.message.success {
+  background: rgba(206, 236, 239, 0.3);
+  color: #030D4F;
+  border: 2px solid #CEECEF;
+}
+
+.message.error {
+  background: rgba(251, 192, 6, 0.1);
+  color: #030D4F;
+  border: 2px solid #FBC006;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 20px;
+    max-width: calc(100% - 40px);
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-links {
+    gap: 8px;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+
+  .form-container h2 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 30px 20px;
+  }
+
+  .header {
+    padding: 20px 15px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+}
