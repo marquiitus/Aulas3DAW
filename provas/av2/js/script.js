@@ -27,8 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (data.success) {
           showMessage('Login realizado com sucesso!', 'success');
           setTimeout(() => {
-            // redirecionar para o dashboard dentro da pasta php
-            window.location.href = 'php/dashboard.php';
+            window.location.href = 'index.html';
           }, 1000);
         } else {
           showMessage(data.message, 'error');
