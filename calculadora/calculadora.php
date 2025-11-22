@@ -27,7 +27,7 @@
   <?php
     if($_SERVER["REQUEST_METHOD"] == "POST") {
       $num1 = $_POST["num1"];
-      $num2 = $_POST["num2"];
+      $num2 = $_POST["num2"];  
       $operador = $_POST["operador"];
       $resultado = 0;
 

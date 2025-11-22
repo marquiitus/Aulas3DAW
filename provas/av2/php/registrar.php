@@ -2,6 +2,8 @@
 session_start();
 include 'conexao.php';
 
+header('Content-Type: application/json'); // Define o cabeçalho para retornar JSON
+
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
   $nome = trim($_POST['nome']);
@@ -19,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   {
     if (empty($_POST[$campo]))
     {
-      header('Location: ../cadastro.html?erro=' . urlencode("Todos os campos marcados com * são obrigatórios!"));
+      echo json_encode(['success' => false, 'message' => 'Todos os campos marcados com * são obrigatórios!']);
       exit;
     }
   }
@@ -27,13 +29,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   // Validação da senha
   if ($senha !== $confirmar_senha)
   {
-    header('Location: ../cadastro.html?erro=' . urlencode("As senhas não coincidem!"));
+    echo json_encode(['success' => false, 'message' => 'As senhas não coincidem!']);
     exit;
   }
 
   if (strlen($senha) < 6)
   {
-    header('Location: ../cadastro.html?erro=' . urlencode("A senha deve ter pelo menos 6 caracteres!"));
+    echo json_encode(['success' => false, 'message' => 'A senha deve ter pelo menos 6 caracteres!']);
     exit;
   }
 
@@ -45,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     
     if ($stmt->rowCount() > 0)
     {
-      header('Location: ../cadastro.html?erro=' . urlencode("Este email ou número de passaporte já está cadastrado!"));
+      echo json_encode(['success' => false, 'message' => 'Este email ou número de passaporte já está cadastrado!']);
       exit;
     }
     
@@ -62,14 +64,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $_SESSION['usuario_nome'] = $nome;
     $_SESSION['usuario_email'] = $email;
 
-    // Redireciona para o dashboard
-    header('Location: dashboard.php');
+    // Retorna sucesso
+    echo json_encode(['success' => true, 'message' => 'Cadastro realizado com sucesso! Redirecionando...']);
     exit;
   }
   catch (PDOException $e)
   {
-    // Em caso de erro, redireciona com mensagem
-    header('Location: ../cadastro.html?erro=' . urlencode("Erro ao cadastrar: " . $e->getMessage()));
+    error_log("Erro ao cadastrar usuário: " . $e->getMessage());
+    echo json_encode(['success' => false, 'message' => 'Ocorreu um erro no servidor. Tente novamente mais tarde.']);
     exit;
   }
 }

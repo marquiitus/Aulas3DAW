@@ -8,7 +8,7 @@ include 'verificar_sessao.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sente - Dashboard</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <style>
         .dashboard-header {
             background: #2c3e50;
@@ -56,17 +56,17 @@ include 'verificar_sessao.php';
 
         <main class="main-content">
             <div class="dashboard-header">
-                <h1>Bem-vindo, <?php echo $_SESSION['usuario_nome']; ?>!</h1>
+                <h1>Bem-vindo, <?php echo htmlspecialchars($_SESSION['usuario_nome'], ENT_QUOTES, 'UTF-8'); ?>!</h1>
                 <p>Esta é sua área logada</p>
             </div>
 
             <div class="user-info">
                 <h2>Suas informações</h2>
-                <p><strong>Nome:</strong> <?php echo $_SESSION['usuario_nome']; ?></p>
-                <p><strong>E-mail:</strong> <?php echo $_SESSION['usuario_email']; ?></p>
-                <p><strong>ID:</strong> <?php echo $_SESSION['usuario_id']; ?></p>
+                <p><strong>Nome:</strong> <?php echo htmlspecialchars($_SESSION['usuario_nome'], ENT_QUOTES, 'UTF-8'); ?></p>
+                <p><strong>E-mail:</strong> <?php echo htmlspecialchars($_SESSION['usuario_email'], ENT_QUOTES, 'UTF-8'); ?></p>
+                <p><strong>ID:</strong> <?php echo htmlspecialchars($_SESSION['usuario_id'], ENT_QUOTES, 'UTF-8'); ?></p>
                 
-                <button class="btn-logout" onclick="window.location.href='logout.php'">Sair</button>
+                <a href="logout.php" class="btn-logout">Sair</a>
             </div>
         </main>
     </div>

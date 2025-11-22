@@ -12,14 +12,3 @@ CREATE TABLE IF NOT EXISTS usuarios (
   telefone VARCHAR(20),
   data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-INSERT INTO usuarios (nome, endereco, email, senha, passaporte, nacionalidade, telefone) 
-VALUES (
-  'Usuário Teste',
-  'Rua Exemplo, 123 - Centro, São Paulo - SP',
-  'teste@teste.com',
-  '123456',
-  'BR123456789',
-  'Brasileira',
-  '(11) 99999-9999'
-);
