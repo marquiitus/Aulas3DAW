@@ -1,0 +1,495 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: #EFEDEA;
+  color: #030D4F;
+  line-height: 1.6;
+}
+
+.hero-main {
+  background: linear-gradient(135deg, #0c1761 0%, #3640a5 100%);
+  color: white;
+  padding: 8rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('https://riotur.rio/wp-content/uploads/2016/07/20725615132_788468857a_k-1.jpg') center/cover;
+  opacity: 0.1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+.hero-subtitle {
+  font-size: 1.5rem;
+  opacity: 0.9;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ===== HEADER ===== */
+.header-full {
+  background: #030D4F;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+}
+
+.nav-full {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.logo-main {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.logo-main a {
+  color: #FFC52C;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.nav-links-main {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  margin-left: 2rem;
+  margin-right: 0;
+  align-items: center;
+}
+
+.nav-links-main a {
+  text-decoration: none;
+  color: #CEECEF;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+}
+
+.nav-links-main a:hover {
+  color: #FFC52C;
+  background: rgba(255, 197, 44, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ===== SOBRE NOS ALINHAMENTO ===== */
+.sobre-nos-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.sobre-nos-link .sobre {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.sobre-nos-link .nos {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 2px;
+  line-height: 1;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-full {
+  margin-top: 100px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(rgba(3, 13, 79, 0.8), rgba(3, 13, 79, 0.9)), 
+              url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 6rem 2rem;
+  margin-bottom: 4rem;
+  border-radius: 0 0 30px 30px;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero p {
+  font-size: 1.5rem;
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+/* Story Section */
+.story-section {
+  padding: 4rem 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #030D4F;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.section-title:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: #FFC52C;
+  border-radius: 2px;
+}
+
+.story-timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.story-timeline:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  background: #FFC52C;
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  display: flex;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.timeline-item:nth-child(odd) {
+  flex-direction: row-reverse;
+}
+
+.timeline-content {
+  width: 45%;
+  padding: 2rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: transform 0.3s;
+}
+
+.timeline-content:hover {
+  transform: translateY(-10px);
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+  text-align: right;
+}
+
+.timeline-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background: #030D4F;
+  color: #FFC52C;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border: 4px solid white;
+  box-shadow: 0 0 0 4px #FFC52C;
+  z-index: 10;
+}
+
+.timeline-year {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #FFC52C;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-title {
+  font-size: 1.5rem;
+  color: #030D4F;
+  margin-bottom: 1rem;
+}
+
+/* Team Section */
+.team-section {
+  padding: 4rem 0;
+  background: #030D4F;
+  color: white;
+  border-radius: 30px 30px 0 0;
+}
+
+.team-section .section-title {
+  color: white;
+}
+
+.team-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.team-member {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s;
+}
+
+.team-member:hover {
+  transform: translateY(-10px);
+}
+
+.member-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+  object-fit: cover;
+  border: 4px solid #FFC52C;
+}
+
+.member-name {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #FFC52C;
+}
+
+.member-role {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+/* Values Section */
+.values-section {
+  padding: 4rem 0;
+}
+
+.values-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.value-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  border-top: 5px solid #FFC52C;
+}
+
+.value-card:hover {
+  transform: translateY(-10px);
+}
+
+.value-icon {
+  font-size: 3rem;
+  color: #030D4F;
+  margin-bottom: 1.5rem;
+}
+
+.value-title {
+  font-size: 1.5rem;
+  color: #030D4F;
+  margin-bottom: 1rem;
+}
+
+/* CTA Section */
+.cta-section {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #FFC52C 0%, #FBC006 100%);
+  text-align: center;
+  border-radius: 30px;
+  margin-bottom: 4rem;
+}
+
+.cta-title {
+  font-size: 2.5rem;
+  color: #030D4F;
+  margin-bottom: 1.5rem;
+}
+
+.cta-button {
+  display: inline-block;
+  background: #030D4F;
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover {
+  background: #1a237e;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Footer */
+.footer-main {
+  background: #030D4F;
+  color: #CEECEF;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-content p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-full {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .nav-links-main {
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+  }
+  
+  .story-timeline:before {
+    left: 30px;
+  }
+  
+  .timeline-item {
+    flex-direction: row !important;
+  }
+  
+  .timeline-content {
+    width: calc(100% - 80px);
+    margin-left: 80px;
+  }
+  
+  .timeline-icon {
+    left: 30px;
+    transform: translateX(0) translateY(-50%);
+  }
+  
+  .timeline-item:nth-child(odd) .timeline-content {
+    text-align: left;
+  }
+  
+  .main-full {
+    margin-top: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .nav-links-main a {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+  
+  .logo-main {
+    font-size: 1.8rem;
+  }
+  
+  .team-member {
+    padding: 1.5rem;
+  }
+  
+  .hero {
+    padding: 6rem 1rem;
+  }
+  
+  .story-section,
+  .team-section,
+  .values-section,
+  .cta-section {
+    padding: 4rem 1rem;
+  }
+}

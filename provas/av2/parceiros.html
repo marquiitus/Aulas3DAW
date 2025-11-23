@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parceiros - Albergue Santa Teresa</title>
+    <link rel="stylesheet" href="css/parceiros.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header-full">
+        <nav class="nav-full">
+            <div class="logo-main"><a href="index.html">Santa Teresa</a></div>
+            <ul class="nav-links-main">
+                <li><a href="login.html">Login</a></li>
+                <li><a href="reserva.html">Reserva</a></li>
+                <li>
+                    <a href="sobreNos.html" class="sobre-nos-link">
+                        <span class="sobre">Sobre</span>
+                        <span class="nos">Nós</span>
+                    </a>
+                </li>
+                <li><a href="parceiros.html">Parceiros</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-full">
+        <section class="hero-partners">
+            <div class="container">
+                <h1>Nossos Parceiros</h1>
+                <p>Descubra as excelentes opções que temos para você</p>
+            </div>
+        </section>
+
+        <section class="partners-section">
+            <div class="container">
+                <h2 class="section-title">Parcerias Exclusivas</h2>
+                <p class="section-subtitle">Trabalhamos com os melhores estabelecimentos para oferecer experiências únicas aos nossos hóspedes</p>
+                
+                <div class="partners-grid">
+                    <!-- Restaurante Parceiro -->
+                    <div class="partner-card">
+                        <div class="partner-header">
+                            <div class="partner-icon">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <h3 class="partner-name">Restaurante Sabor da Terra</h3>
+                            <span class="partner-category">Gastronomia</span>
+                        </div>
+                        
+                        <div class="partner-features">
+                            <div class="feature-item">
+                                <div class="feature-number">1</div>
+                                <div class="feature-text">
+                                    <h4>Restaurante parceiro do nosso Hostel</h4>
+                                    <p>Uma parceria especial que oferece descontos exclusivos para nossos hóspedes</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-number">2</div>
+                                <div class="feature-text">
+                                    <h4>Culinária diversificada e pratos deliciosos</h4>
+                                    <p>Cardápio variado com opções que agradam a todos os paladares</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-number">3</div>
+                                <div class="feature-text">
+                                    <h4>Ambiente aconchegante com espaço ao ar livre</h4>
+                                    <p>Ambiente perfeito para refeições relaxantes em família ou com amigos</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-number">4</div>
+                                <div class="feature-text">
+                                    <h4>Pratos do dia escolhidos especialmente pelo chef</h4>
+                                    <p>Opções especiais preparadas com ingredientes frescos e selecionados</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="partner-benefits">
+                            <h4>Vantagens para hóspedes:</h4>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> 15% de desconto em todo o cardápio</li>
+                                <li><i class="fas fa-check-circle"></i> Reserva prioritária em horários de pico</li>
+                                <li><i class="fas fa-check-circle"></i> Degustação especial para hóspedes do albergue</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="partner-actions">
+                            <button class="btn-secondary" onclick="showPartnerDetails('restaurante')">
+                                <i class="fas fa-info-circle"></i> Mais Detalhes
+                            </button>
+                            <button class="btn-primary" onclick="openReservation('restaurante')">
+                                <i class="fas fa-calendar-alt"></i> Fazer Reserva
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Passeios Parceiros -->
+                    <div class="partner-card">
+                        <div class="partner-header">
+                            <div class="partner-icon">
+                                <i class="fas fa-hiking"></i>
+                            </div>
+                            <h3 class="partner-name">Trilhas Cariocas</h3>
+                            <span class="partner-category">Passeios e Aventura</span>
+                        </div>
+                        
+                        <div class="partner-features">
+                            <div class="feature-item">
+                                <div class="feature-number">1</div>
+                                <div class="feature-text">
+                                    <h4>Empresa parceira de ecoturismo</h4>
+                                    <p>Guias especializados em trilhas ecológicas na região de Santa Teresa</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-number">2</div>
+                                <div class="feature-text">
+                                    <h4>Roteiros personalizados para nossos hóspedes</h4>
+                                    <p>Passeios adaptados ao seu nível de experiência e interesse</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-number">3</div>
+                                <div class="feature-text">
+                                    <h4>Equipamentos de qualidade incluídos</h4>
+                                    <p>Todos os equipamentos necessários fornecidos sem custo adicional</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-number">4</div>
+                                <div class="feature-text">
+                                    <h4>Grupos pequenos para melhor experiência</h4>
+                                    <p>Turmas reduzidas garantem atenção personalizada do guia</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="partner-benefits">
+                            <h4>Vantagens para hóspedes:</h4>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> 20% de desconto em todos os passeios</li>
+                                <li><i class="fas fa-check-circle"></i> Transporte incluso do albergue</li>
+                                <li><i class="fas fa-check-circle"></i> Lanche de cortesia durante as trilhas</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="partner-actions">
+                            <button class="btn-secondary" onclick="showPartnerDetails('trilhas')">
+                                <i class="fas fa-info-circle"></i> Mais Detalhes
+                            </button>
+                            <button class="btn-primary" onclick="openReservation('trilhas')">
+                                <i class="fas fa-calendar-alt"></i> Agendar Passeio
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Transporte Parceiro -->
+                    <div class="partner-card">
+                        <div class="partner-header">
+                            <div class="partner-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <h3 class="partner-name">Táxi Amigo</h3>
+                            <span class="partner-category">Transporte</span>
+                        </div>
+                        
+                        <div class="partner-features">
+                            <div class="feature-item">
+                                <div class="feature-number">1</div>
+                                <div class="feature-text">
+                                    <h4>Serviço de transporte parceiro oficial</h4>
+                                    <p>Motoristas credenciados e veículos confortáveis</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-number">2</div>
+                                <div class="feature-text">
+                                    <h4>Preços fixos e tabelados</h4>
+                                    <p>Sem surpresas desagradáveis - você sabe o valor antes da corrida</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-number">3</div>
+                                <div class="feature-text">
+                                    <h4>Atendimento 24 horas</h4>
+                                    <p>Disponível a qualquer hora do dia ou da noite</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-number">4</div>
+                                <div class="feature-text">
+                                    <h4>Motoristas conhecedores da região</h4>
+                                    <p>Profissionais que dominam as rotas de Santa Teresa e arredores</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="partner-benefits">
+                            <h4>Vantagens para hóspedes:</h4>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> 10% de desconto em todas as corridas</li>
+                                <li><i class="fas fa-check-circle"></i> Prioridade no atendimento</li>
+                                <li><i class="fas fa-check-circle"></i> Serviço de reserva pelo albergue</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="partner-actions">
+                            <button class="btn-secondary" onclick="showPartnerDetails('taxi')">
+                                <i class="fas fa-info-circle"></i> Mais Detalhes
+                            </button>
+                            <button class="btn-primary" onclick="openReservation('taxi')">
+                                <i class="fas fa-phone"></i> Chamar Táxi
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="partnership-cta">
+            <div class="container">
+                <h2>Quer se tornar um parceiro?</h2>
+                <p>Junte-se à nossa rede de parceiros e ofereça seus serviços aos nossos hóspedes</p>
+                <button class="btn-cta" onclick="openPartnershipForm()">
+                    <i class="fas fa-handshake"></i> Tornar-se Parceiro
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-main">
+        <div class="footer-content">
+            <p>&copy; 2025 Albergue do Seu Almeida.</p>
+            <p>Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal para detalhes do parceiro -->
+    <div id="partnerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent">
+                <!-- Conteúdo será preenchido via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Funções para interação com os parceiros
+        function showPartnerDetails(partnerType) {
+            const modal = document.getElementById('partnerModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            let content = '';
+            
+            switch(partnerType) {
+                case 'restaurante':
+                    content = `
+                        <h2>Restaurante Sabor da Terra</h2>
+                        <div class="modal-details">
+                            <div class="detail-item">
+                                <h3>Horário de Funcionamento</h3>
+                                <p>Segunda a Sábado: 11h às 23h</p>
+                                <p>Domingo: 12h às 17h</p>
+                            </div>
+                            <div class="detail-item">
+                                <h3>Localização</h3>
+                                <p>Rua das Flores, 123 - Santa Teresa</p>
+                                <p>Próximo ao Largo dos Guimarães</p>
+                            </div>
+                            <div class="detail-item">
+                                <h3>Especialidades</h3>
+                                <p>Culinária brasileira contemporânea</p>
+                                <p>Pratos com ingredientes locais e orgânicos</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'trilhas':
+                    content = `
+                        <h2>Trilhas Cariocas</h2>
+                        <div class="modal-details">
+                            <div class="detail-item">
+                                <h3>Trilhas Disponíveis</h3>
+                                <p>Trilha do Parque da Cidade - Nível: Fácil</p>
+                                <p>Trilha do Corcovado - Nível: Moderado</p>
+                                <p>Trilha da Pedra Bonita - Nível: Difícil</p>
+                            </div>
+                            <div class="detail-item">
+                                <h3>Duração e Preços</h3>
+                                <p>Trilhas de 3 a 6 horas de duração</p>
+                                <p>Preços a partir de R$ 80 (com desconto para hóspedes)</p>
+                            </div>
+                            <div class="detail-item">
+                                <h3>O que Inclui</h3>
+                                <p>Guia credenciado, equipamentos de segurança, transporte e lanche</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'taxi':
+                    content = `
+                        <h2>Táxi Amigo</h2>
+                        <div class="modal-details">
+                            <div class="detail-item">
+                                <h3>Como Solicitar</h3>
+                                <p>Pelo telefone: (21) 3456-7890</p>
+                                <p>Pelo aplicativo "Táxi Amigo"</p>
+                                <p>Solicitando na recepção do albergue</p>
+                            </div>
+                            <div class="detail-item">
+                                <h3>Área de Atuação</h3>
+                                <p>Toda a cidade do Rio de Janeiro</p>
+                                <p>Aeroportos e terminais rodoviários</p>
+                            </div>
+                            <div class="detail-item">
+                                <h3>Tipos de Veículo</h3>
+                                <p>Carros sedans para até 4 passageiros</p>
+                                <p>Vans para grupos maiores</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            modalContent.innerHTML = content;
+            modal.style.display = 'block';
+        }
+        
+        function openReservation(partnerType) {
+            alert(`Redirecionando para sistema de reservas do ${partnerType}. Em uma implementação real, isso abriria um formulário de reserva.`);
+            // Em uma implementação real, aqui abriríamos um formulário de reserva
+            // ou redirecionaríamos para uma página específica
+        }
+        
+        function openPartnershipForm() {
+            alert("Abrindo formulário para novas parcerias. Em uma implementação real, isso abriria um formulário de cadastro.");
+            // Em uma implementação real, aqui abriríamos um formulário para novas parcerias
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('partnerModal');
+            modal.style.display = 'none';
+        }
+        
+        // Fechar modal ao clicar fora dele
+        window.onclick = function(event) {
+            const modal = document.getElementById('partnerModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

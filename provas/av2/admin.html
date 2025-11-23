@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Santa Teresa</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <header class="header-full">
+        <nav class="nav-full">
+            <div class="logo-main"><a href="index.html">Santa Teresa</a></div>
+            <ul class="nav-links-main">
+                <li><a href="#" id="logoutBtn">Sair</a></li>
+                <li><a href="index.html">Voltar ao Site</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-full">
+        <section class="admin-hero">
+            <div class="container">
+                <h1>Painel Administrativo</h1>
+                <p>Bem-vindo, Administrador!</p>
+            </div>
+        </section>
+
+        <section class="admin-dashboard">
+            <div class="container">
+                <div class="dashboard-grid">
+                    <!-- Card de Reservas -->
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3>Reservas</h3>
+                        <p class="card-number">24</p>
+                        <p class="card-label">Reservas ativas</p>
+                        <button class="card-btn" onclick="viewReservations()">Ver Detalhes</button>
+                    </div>
+
+                    <!-- Card de Usuários -->
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Usuários</h3>
+                        <p class="card-number">156</p>
+                        <p class="card-label">Usuários cadastrados</p>
+                        <button class="card-btn" onclick="viewUsers()">Gerenciar</button>
+                    </div>
+
+                    <!-- Card de Quartos -->
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-bed"></i>
+                        </div>
+                        <h3>Quartos</h3>
+                        <p class="card-number">12</p>
+                        <p class="card-label">Quartos disponíveis</p>
+                        <button class="card-btn" onclick="manageRooms()">Configurar</button>
+                    </div>
+
+                    <!-- Card de Financeiro -->
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Financeiro</h3>
+                        <p class="card-number">R$ 8.540</p>
+                        <p class="card-label">Receita deste mês</p>
+                        <button class="card-btn" onclick="viewFinancial()">Relatórios</button>
+                    </div>
+                </div>
+
+                <!-- Seção de Reservas Recentes -->
+                <div class="recent-section">
+                    <h2>Reservas Recentes</h2>
+                    <div class="reservations-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Hóspede</th>
+                                    <th>Quarto</th>
+                                    <th>Check-in</th>
+                                    <th>Check-out</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#001</td>
+                                    <td>João Silva</td>
+                                    <td>Dormitório Misto - Cama 2</td>
+                                    <td>15/05/2024</td>
+                                    <td>18/05/2024</td>
+                                    <td><span class="status confirmed">Confirmada</span></td>
+                                    <td>
+                                        <button class="action-btn view">Ver</button>
+                                        <button class="action-btn edit">Editar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#002</td>
+                                    <td>Maria Santos</td>
+                                    <td>Quarto Privativo</td>
+                                    <td>16/05/2024</td>
+                                    <td>20/05/2024</td>
+                                    <td><span class="status pending">Pendente</span></td>
+                                    <td>
+                                        <button class="action-btn view">Ver</button>
+                                        <button class="action-btn confirm">Confirmar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#003</td>
+                                    <td>Pedro Costa</td>
+                                    <td>Dormitório Masculino - Cama 1</td>
+                                    <td>14/05/2024</td>
+                                    <td>17/05/2024</td>
+                                    <td><span class="status active">Ativa</span></td>
+                                    <td>
+                                        <button class="action-btn view">Ver</button>
+                                        <button class="action-btn edit">Editar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-main">
+        <div class="footer-content">
+            <p>&copy; 2025 Albergue do Seu Almeida</p>
+            <p>Painel Administrativo</p>
+        </div>
+    </footer>
+
+    <script>
+        // Verificar se é administrador (em produção, isso seria verificado no servidor)
+        function checkAdminAccess() {
+            // Esta é uma verificação básica - em produção, use sessões do servidor
+            const isAdmin = sessionStorage.getItem('is_admin') === 'true';
+            if (!isAdmin) {
+                window.location.href = 'login.html';
+                return false;
+            }
+            return true;
+        }
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            sessionStorage.removeItem('is_admin');
+            window.location.href = 'login.html';
+        });
+
+        // Funções dos botões (placeholders)
+        function viewReservations() {
+            alert('Abrindo gerenciamento de reservas...');
+        }
+
+        function viewUsers() {
+            alert('Abrindo gerenciamento de usuários...');
+        }
+
+        function manageRooms() {
+            alert('Abrindo configuração de quartos...');
+        }
+
+        function viewFinancial() {
+            alert('Abrindo relatórios financeiros...');
+        }
+
+        // Verificar acesso ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!checkAdminAccess()) {
+                return;
+            }
+        });
+    </script>
+</body>
+</html>

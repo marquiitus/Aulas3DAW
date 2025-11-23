@@ -17,6 +17,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
   try
   {
+    // Verificação específica para o administrador
+    if ($email === 'admin@gmail.com' && $senha === '123456') {
+      $_SESSION['usuario_id'] = 0; // ID especial para admin
+      $_SESSION['usuario_nome'] = 'Administrador';
+      $_SESSION['usuario_email'] = 'admin@gmail.com';
+      $_SESSION['is_admin'] = true;
+      
+      echo json_encode([
+        'success' => true, 
+        'message' => 'Login administrativo realizado com sucesso!',
+        'is_admin' => true
+      ]);
+      exit;
+    }
+
+    // Login para usuários normais
     $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = ? AND senha = ?");
     $stmt->execute([$email, $senha]);
     $usuario = $stmt->fetch();
@@ -26,8 +42,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
       $_SESSION['usuario_id'] = $usuario['id'];
       $_SESSION['usuario_nome'] = $usuario['nome'];
       $_SESSION['usuario_email'] = $usuario['email'];
+      $_SESSION['is_admin'] = false;
       
-      echo json_encode(['success' => true, 'message' => 'Login realizado com sucesso!']);
+      echo json_encode([
+        'success' => true, 
+        'message' => 'Login realizado com sucesso!',
+        'is_admin' => false
+      ]);
     }
     else
     {
@@ -36,6 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   }
   catch (PDOException $e)
   {
+    error_log("Erro no login: " . $e->getMessage());
     echo json_encode(['success' => false, 'message' => 'Erro no servidor. Tente novamente mais tarde.']);
   }
 }

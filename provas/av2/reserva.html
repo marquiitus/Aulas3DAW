@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva - Albergue Santa Teresa</title>
+    <link rel="stylesheet" href="css/reserva.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header-full">
+        <nav class="nav-full">
+            <div class="logo-main"><a href="index.html">Santa Teresa</a></div>
+            <ul class="nav-links-main">
+                <li><a href="login.html">Login</a></li>
+                <li><a href="reserva.html">Reserva</a></li>
+                <li>
+                    <a href="sobreNos.html" class="sobre-nos-link">
+                        <span class="sobre">Sobre</span>
+                        <span class="nos">Nós</span>
+                    </a>
+                </li>
+                <li><a href="parceiros.html">Parceiros</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-full">
+        <section class="hero-reserva">
+            <div class="container">
+                <h1>Faça sua Reserva</h1>
+                <p>Encontre o quarto perfeito para sua estadia em Santa Teresa</p>
+            </div>
+        </section>
+
+        <section class="reserva-section">
+            <div class="container">
+                <div class="reserva-layout">
+                    <!-- Filtros -->
+                    <aside class="filters-sidebar">
+                        <div class="filter-group">
+                            <h3>Filtrar Quartos</h3>
+                            
+                            <div class="filter-option">
+                                <h4>Tipo de Cama</h4>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="bed-type" value="sol-manha" class="filter-checkbox">
+                                        <span class="checkmark"></span>
+                                        Não tem sol de manhã
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="bed-type" value="janela" class="filter-checkbox">
+                                        <span class="checkmark"></span>
+                                        Tem janela
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="bed-type" value="beliche-superior" class="filter-checkbox">
+                                        <span class="checkmark"></span>
+                                        Beliche superior
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="bed-type" value="beliche-inferior" class="filter-checkbox">
+                                        <span class="checkmark"></span>
+                                        Beliche inferior
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="bed-type" value="cama-casal" class="filter-checkbox">
+                                        <span class="checkmark"></span>
+                                        Cama de casal
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-option">
+                                <h4>Comodidades</h4>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="amenities" value="ar-condicionado" class="filter-checkbox">
+                                        <span class="checkmark"></span>
+                                        Ar condicionado
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="amenities" value="ventilador" class="filter-checkbox">
+                                        <span class="checkmark"></span>
+                                        Ventilador
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="amenities" value="tom-proximo" class="filter-checkbox">
+                                        <span class="checkmark"></span>
+                                        Tomada próxima
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="amenities" value="iluminacao" class="filter-checkbox">
+                                        <span class="checkmark"></span>
+                                        Iluminação individual
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="amenities" value="privacidade" class="filter-checkbox">
+                                        <span class="checkmark"></span>
+                                        Cortina de privacidade
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-option">
+                                <h4>Tipo de Quarto</h4>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="room-type" value="masculino" class="filter-checkbox">
+                                        <span class="checkmark"></span>
+                                        Dormitório Masculino
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="room-type" value="feminino" class="filter-checkbox">
+                                        <span class="checkmark"></span>
+                                        Dormitório Feminino
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="room-type" value="misto" class="filter-checkbox">
+                                        <span class="checkmark"></span>
+                                        Dormitório Misto
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="room-type" value="privativo" class="filter-checkbox">
+                                        <span class="checkmark"></span>
+                                        Quarto Privativo
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <button class="btn-filter" id="applyFilters">
+                                <i class="fas fa-filter"></i> Aplicar Filtros
+                            </button>
+                            <button class="btn-filter btn-secondary" id="clearFilters">
+                                <i class="fas fa-times"></i> Limpar Filtros
+                            </button>
+                        </div>
+                    </aside>
+
+                    <!-- Lista de Quartos -->
+                    <div class="rooms-container">
+                        <div class="rooms-header">
+                            <h2>Quartos Disponíveis</h2>
+                            <div class="results-count">
+                                <span id="roomsCount">6</span> quartos encontrados
+                            </div>
+                        </div>
+                        
+                        <div class="rooms-grid" id="roomsGrid">
+                            <!-- Quarto 1 -->
+                            <div class="room-card" data-room-type="masculino" data-features="janela,beliche-superior,beliche-inferior,ventilador,tom-proximo">
+                                <div class="room-header">
+                                    <h3>Dormitório Masculino - 101</h3>
+                                    <span class="room-price">R$ 85<span>/noite</span></span>
+                                </div>
+                                
+                                <div class="room-details">
+                                    <div class="room-features">
+                                        <span class="feature-tag">6 camas</span>
+                                        <span class="feature-tag">Banheiro compartilhado</span>
+                                        <span class="feature-tag">Ar condicionado</span>
+                                    </div>
+                                    
+                                    <div class="beds-container">
+                                        <h4>Camas disponíveis:</h4>
+                                        <div class="beds-grid">
+                                            <div class="bed-item" data-bed-type="beliche-superior" data-features="janela,ventilador,tom-proximo">
+                                                <div class="bed-icon">
+                                                    <i class="fas fa-bed"></i>
+                                                </div>
+                                                <div class="bed-info">
+                                                    <h5>Cama 1 - Beliche Superior</h5>
+                                                    <ul class="bed-features">
+                                                        <li><i class="fas fa-check"></i> Tem janela</li>
+                                                        <li><i class="fas fa-check"></i> Ventilador próximo</li>
+                                                        <li><i class="fas fa-check"></i> Tomada próxima</li>
+                                                        <li><i class="fas fa-times"></i> Não tem sol de manhã</li>
+                                                    </ul>
+                                                </div>
+                                                <button class="btn-reserve" data-bed="1">
+                                                    Reservar
+                                                </button>
+                                            </div>
+                                            
+                                            <div class="bed-item" data-bed-type="beliche-inferior" data-features="janela,ventilador,tom-proximo,iluminacao">
+                                                <div class="bed-icon">
+                                                    <i class="fas fa-bed"></i>
+                                                </div>
+                                                <div class="bed-info">
+                                                    <h5>Cama 2 - Beliche Inferior</h5>
+                                                    <ul class="bed-features">
+                                                        <li><i class="fas fa-check"></i> Tem janela</li>
+                                                        <li><i class="fas fa-check"></i> Ventilador próximo</li>
+                                                        <li><i class="fas fa-check"></i> Tomada próxima</li>
+                                                        <li><i class="fas fa-check"></i> Iluminação individual</li>
+                                                        <li><i class="fas fa-times"></i> Não tem sol de manhã</li>
+                                                    </ul>
+                                                </div>
+                                                <button class="btn-reserve" data-bed="2">
+                                                    Reservar
+                                                </button>
+                                            </div>
+                                            
+                                            <div class="bed-item" data-bed-type="beliche-superior" data-features="sol-manha,ventilador">
+                                                <div class="bed-icon">
+                                                    <i class="fas fa-bed"></i>
+                                                </div>
+                                                <div class="bed-info">
+                                                    <h5>Cama 3 - Beliche Superior</h5>
+                                                    <ul class="bed-features">
+                                                        <li><i class="fas fa-times"></i> Não tem janela</li>
+                                                        <li><i class="fas fa-check"></i> Ventilador próximo</li>
+                                                        <li><i class="fas fa-times"></i> Tomada distante</li>
+                                                        <li><i class="fas fa-check"></i> Tem sol de manhã</li>
+                                                    </ul>
+                                                </div>
+                                                <button class="btn-reserve" data-bed="3">
+                                                    Reservar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Quarto 2 -->
+                            <div class="room-card" data-room-type="feminino" data-features="janela,beliche-superior,beliche-inferior,ar-condicionado,privacidade">
+                                <div class="room-header">
+                                    <h3>Dormitório Feminino - 102</h3>
+                                    <span class="room-price">R$ 90<span>/noite</span></span>
+                                </div>
+                                
+                                <div class="room-details">
+                                    <div class="room-features">
+                                        <span class="feature-tag">4 camas</span>
+                                        <span class="feature-tag">Banheiro compartilhado</span>
+                                        <span class="feature-tag">Ar condicionado</span>
+                                        <span class="feature-tag">Cortinas de privacidade</span>
+                                    </div>
+                                    
+                                    <div class="beds-container">
+                                        <h4>Camas disponíveis:</h4>
+                                        <div class="beds-grid">
+                                            <div class="bed-item" data-bed-type="beliche-inferior" data-features="janela,ar-condicionado,privacidade,iluminacao">
+                                                <div class="bed-icon">
+                                                    <i class="fas fa-bed"></i>
+                                                </div>
+                                                <div class="bed-info">
+                                                    <h5>Cama 1 - Beliche Inferior</h5>
+                                                    <ul class="bed-features">
+                                                        <li><i class="fas fa-check"></i> Tem janela</li>
+                                                        <li><i class="fas fa-check"></i> Ar condicionado</li>
+                                                        <li><i class="fas fa-check"></i> Cortina de privacidade</li>
+                                                        <li><i class="fas fa-check"></i> Iluminação individual</li>
+                                                        <li><i class="fas fa-times"></i> Não tem sol de manhã</li>
+                                                    </ul>
+                                                </div>
+                                                <button class="btn-reserve" data-bed="1">
+                                                    Reservar
+                                                </button>
+                                            </div>
+                                            
+                                            <div class="bed-item" data-bed-type="beliche-superior" data-features="sol-manha,ar-condicionado,privacidade">
+                                                <div class="bed-icon">
+                                                    <i class="fas fa-bed"></i>
+                                                </div>
+                                                <div class="bed-info">
+                                                    <h5>Cama 2 - Beliche Superior</h5>
+                                                    <ul class="bed-features">
+                                                        <li><i class="fas fa-times"></i> Não tem janela</li>
+                                                        <li><i class="fas fa-check"></i> Ar condicionado</li>
+                                                        <li><i class="fas fa-check"></i> Cortina de privacidade</li>
+                                                        <li><i class="fas fa-check"></i> Tem sol de manhã</li>
+                                                    </ul>
+                                                </div>
+                                                <button class="btn-reserve" data-bed="2">
+                                                    Reservar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Quarto 3 -->
+                            <div class="room-card" data-room-type="misto" data-features="janela,beliche-superior,beliche-inferior,ventilador,tom-proximo">
+                                <div class="room-header">
+                                    <h3>Dormitório Misto - 103</h3>
+                                    <span class="room-price">R$ 80<span>/noite</span></span>
+                                </div>
+                                
+                                <div class="room-details">
+                                    <div class="room-features">
+                                        <span class="feature-tag">8 camas</span>
+                                        <span class="feature-tag">Banheiro compartilhado</span>
+                                        <span class="feature-tag">Ventilador</span>
+                                    </div>
+                                    
+                                    <div class="beds-container">
+                                        <h4>Camas disponíveis:</h4>
+                                        <div class="beds-grid">
+                                            <div class="bed-item" data-bed-type="beliche-inferior" data-features="janela,ventilador,tom-proximo,iluminacao">
+                                                <div class="bed-icon">
+                                                    <i class="fas fa-bed"></i>
+                                                </div>
+                                                <div class="bed-info">
+                                                    <h5>Cama 1 - Beliche Inferior</h5>
+                                                    <ul class="bed-features">
+                                                        <li><i class="fas fa-check"></i> Tem janela</li>
+                                                        <li><i class="fas fa-check"></i> Ventilador próximo</li>
+                                                        <li><i class="fas fa-check"></i> Tomada próxima</li>
+                                                        <li><i class="fas fa-check"></i> Iluminação individual</li>
+                                                        <li><i class="fas fa-times"></i> Não tem sol de manhã</li>
+                                                    </ul>
+                                                </div>
+                                                <button class="btn-reserve" data-bed="1">
+                                                    Reservar
+                                                </button>
+                                            </div>
+                                            
+                                            <div class="bed-item" data-bed-type="beliche-superior" data-features="sol-manha,ventilador">
+                                                <div class="bed-icon">
+                                                    <i class="fas fa-bed"></i>
+                                                </div>
+                                                <div class="bed-info">
+                                                    <h5>Cama 2 - Beliche Superior</h5>
+                                                    <ul class="bed-features">
+                                                        <li><i class="fas fa-times"></i> Não tem janela</li>
+                                                        <li><i class="fas fa-check"></i> Ventilador próximo</li>
+                                                        <li><i class="fas fa-times"></i> Tomada distante</li>
+                                                        <li><i class="fas fa-check"></i> Tem sol de manhã</li>
+                                                    </ul>
+                                                </div>
+                                                <button class="btn-reserve" data-bed="2">
+                                                    Reservar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Quarto 4 -->
+                            <div class="room-card" data-room-type="privativo" data-features="cama-casal,ar-condicionado,janela">
+                                <div class="room-header">
+                                    <h3>Quarto Privativo - 201</h3>
+                                    <span class="room-price">R$ 180<span>/noite</span></span>
+                                </div>
+                                
+                                <div class="room-details">
+                                    <div class="room-features">
+                                        <span class="feature-tag">1 cama de casal</span>
+                                        <span class="feature-tag">Banheiro privativo</span>
+                                        <span class="feature-tag">Ar condicionado</span>
+                                        <span class="feature-tag">Varanda</span>
+                                    </div>
+                                    
+                                    <div class="beds-container">
+                                        <h4>Cama disponível:</h4>
+                                        <div class="beds-grid">
+                                            <div class="bed-item" data-bed-type="cama-casal" data-features="janela,ar-condicionado,tom-proximo,iluminacao">
+                                                <div class="bed-icon">
+                                                    <i class="fas fa-bed"></i>
+                                                </div>
+                                                <div class="bed-info">
+                                                    <h5>Cama de Casal</h5>
+                                                    <ul class="bed-features">
+                                                        <li><i class="fas fa-check"></i> Tem janela</li>
+                                                        <li><i class="fas fa-check"></i> Ar condicionado</li>
+                                                        <li><i class="fas fa-check"></i> Tomada próxima</li>
+                                                        <li><i class="fas fa-check"></i> Iluminação individual</li>
+                                                        <li><i class="fas fa-times"></i> Não tem sol de manhã</li>
+                                                    </ul>
+                                                </div>
+                                                <button class="btn-reserve" data-bed="1">
+                                                    Reservar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Quarto 5 -->
+                            <div class="room-card" data-room-type="masculino" data-features="beliche-superior,beliche-inferior,ar-condicionado,privacidade">
+                                <div class="room-header">
+                                    <h3>Dormitório Masculino - 104</h3>
+                                    <span class="room-price">R$ 95<span>/noite</span></span>
+                                </div>
+                                
+                                <div class="room-details">
+                                    <div class="room-features">
+                                        <span class="feature-tag">6 camas</span>
+                                        <span class="feature-tag">Banheiro compartilhado</span>
+                                        <span class="feature-tag">Ar condicionado</span>
+                                        <span class="feature-tag">Cortinas de privacidade</span>
+                                    </div>
+                                    
+                                    <div class="beds-container">
+                                        <h4>Camas disponíveis:</h4>
+                                        <div class="beds-grid">
+                                            <div class="bed-item" data-bed-type="beliche-inferior" data-features="sol-manha,ar-condicionado,privacidade,iluminacao">
+                                                <div class="bed-icon">
+                                                    <i class="fas fa-bed"></i>
+                                                </div>
+                                                <div class="bed-info">
+                                                    <h5>Cama 1 - Beliche Inferior</h5>
+                                                    <ul class="bed-features">
+                                                        <li><i class="fas fa-times"></i> Não tem janela</li>
+                                                        <li><i class="fas fa-check"></i> Ar condicionado</li>
+                                                        <li><i class="fas fa-check"></i> Cortina de privacidade</li>
+                                                        <li><i class="fas fa-check"></i> Iluminação individual</li>
+                                                        <li><i class="fas fa-check"></i> Tem sol de manhã</li>
+                                                    </ul>
+                                                </div>
+                                                <button class="btn-reserve" data-bed="1">
+                                                    Reservar
+                                                </button>
+                                            </div>
+                                            
+                                            <div class="bed-item" data-bed-type="beliche-superior" data-features="ar-condicionado,privacidade,tom-proximo">
+                                                <div class="bed-icon">
+                                                    <i class="fas fa-bed"></i>
+                                                </div>
+                                                <div class="bed-info">
+                                                    <h5>Cama 2 - Beliche Superior</h5>
+                                                    <ul class="bed-features">
+                                                        <li><i class="fas fa-times"></i> Não tem janela</li>
+                                                        <li><i class="fas fa-check"></i> Ar condicionado</li>
+                                                        <li><i class="fas fa-check"></i> Cortina de privacidade</li>
+                                                        <li><i class="fas fa-check"></i> Tomada próxima</li>
+                                                        <li><i class="fas fa-times"></i> Não tem sol de manhã</li>
+                                                    </ul>
+                                                </div>
+                                                <button class="btn-reserve" data-bed="2">
+                                                    Reservar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Quarto 6 -->
+                            <div class="room-card" data-room-type="feminino" data-features="janela,beliche-superior,beliche-inferior,ventilador">
+                                <div class="room-header">
+                                    <h3>Dormitório Feminino - 105</h3>
+                                    <span class="room-price">R$ 85<span>/noite</span></span>
+                                </div>
+                                
+                                <div class="room-details">
+                                    <div class="room-features">
+                                        <span class="feature-tag">4 camas</span>
+                                        <span class="feature-tag">Banheiro compartilhado</span>
+                                        <span class="feature-tag">Ventilador</span>
+                                    </div>
+                                    
+                                    <div class="beds-container">
+                                        <h4>Camas disponíveis:</h4>
+                                        <div class="beds-grid">
+                                            <div class="bed-item" data-bed-type="beliche-inferior" data-features="janela,ventilador,tom-proximo">
+                                                <div class="bed-icon">
+                                                    <i class="fas fa-bed"></i>
+                                                </div>
+                                                <div class="bed-info">
+                                                    <h5>Cama 1 - Beliche Inferior</h5>
+                                                    <ul class="bed-features">
+                                                        <li><i class="fas fa-check"></i> Tem janela</li>
+                                                        <li><i class="fas fa-check"></i> Ventilador próximo</li>
+                                                        <li><i class="fas fa-check"></i> Tomada próxima</li>
+                                                        <li><i class="fas fa-times"></i> Não tem sol de manhã</li>
+                                                    </ul>
+                                                </div>
+                                                <button class="btn-reserve" data-bed="1">
+                                                    Reservar
+                                                </button>
+                                            </div>
+                                            
+                                            <div class="bed-item" data-bed-type="beliche-superior" data-features="janela,ventilador,iluminacao">
+                                                <div class="bed-icon">
+                                                    <i class="fas fa-bed"></i>
+                                                </div>
+                                                <div class="bed-info">
+                                                    <h5>Cama 2 - Beliche Superior</h5>
+                                                    <ul class="bed-features">
+                                                        <li><i class="fas fa-check"></i> Tem janela</li>
+                                                        <li><i class="fas fa-check"></i> Ventilador próximo</li>
+                                                        <li><i class="fas fa-times"></i> Tomada distante</li>
+                                                        <li><i class="fas fa-check"></i> Iluminação individual</li>
+                                                        <li><i class="fas fa-check"></i> Tem sol de manhã</li>
+                                                    </ul>
+                                                </div>
+                                                <button class="btn-reserve" data-bed="2">
+                                                    Reservar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-main">
+        <div class="footer-content">
+            <p>&copy; 2025 Albergue do Seu Almeida.</p>
+            <p>Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal de Reserva -->
+    <div id="reservationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalReservationContent">
+                <h2>Fazer Reserva</h2>
+                <form id="reservationForm">
+                    <div class="form-group">
+                        <label for="guestName">Nome Completo</label>
+                        <input type="text" id="guestName" name="guestName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guestEmail">E-mail</label>
+                        <input type="email" id="guestEmail" name="guestEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guestPhone">Telefone</label>
+                        <input type="tel" id="guestPhone" name="guestPhone" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="checkinDate">Data de Check-in</label>
+                            <input type="date" id="checkinDate" name="checkinDate" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="checkoutDate">Data de Check-out</label>
+                            <input type="date" id="checkoutDate" name="checkoutDate" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="roomDetails">Quarto e Cama Selecionados</label>
+                        <input type="text" id="roomDetails" name="roomDetails" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="specialRequests">Pedidos Especiais</label>
+                        <textarea id="specialRequests" name="specialRequests" rows="4"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-reserve-confirm">
+                        <i class="fas fa-check"></i> Confirmar Reserva
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script>
+    // Filtros e funcionalidades da página de reserva
+    document.addEventListener('DOMContentLoaded', function() {
+        const applyFiltersBtn = document.getElementById('applyFilters');
+        const clearFiltersBtn = document.getElementById('clearFilters');
+        const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
+        const roomCards = document.querySelectorAll('.room-card');
+        const roomsCount = document.getElementById('roomsCount');
+        const reserveButtons = document.querySelectorAll('.btn-reserve');
+        const reservationModal = document.getElementById('reservationModal');
+        const roomDetailsInput = document.getElementById('roomDetails');
+        const reservationForm = document.getElementById('reservationForm');
+        
+        // Aplicar filtros
+        applyFiltersBtn.addEventListener('click', function() {
+            const selectedFilters = {
+                bedType: [],
+                amenities: [],
+                roomType: []
+            };
+            
+            // Coletar filtros selecionados
+            filterCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    if (checkbox.name === 'bed-type') {
+                        selectedFilters.bedType.push(checkbox.value);
+                    } else if (checkbox.name === 'amenities') {
+                        selectedFilters.amenities.push(checkbox.value);
+                    } else if (checkbox.name === 'room-type') {
+                        selectedFilters.roomType.push(checkbox.value);
+                    }
+                }
+            });
+            
+            // Aplicar filtros aos quartos
+            let visibleRooms = 0;
+            
+            roomCards.forEach(room => {
+                let showRoom = true;
+                const roomType = room.getAttribute('data-room-type');
+                const roomFeatures = room.getAttribute('data-features').split(',');
+                
+                // Filtrar por tipo de quarto
+                if (selectedFilters.roomType.length > 0 && !selectedFilters.roomType.includes(roomType)) {
+                    showRoom = false;
+                }
+                
+                // Filtrar por características das camas
+                if (showRoom && selectedFilters.bedType.length > 0) {
+                    const beds = room.querySelectorAll('.bed-item');
+                    let hasMatchingBed = false;
+                    
+                    beds.forEach(bed => {
+                        const bedFeatures = bed.getAttribute('data-features').split(',');
+                        const hasAllFilters = selectedFilters.bedType.every(filter => 
+                            bedFeatures.includes(filter)
+                        );
+                        
+                        if (hasAllFilters) {
+                            hasMatchingBed = true;
+                        }
+                    });
+                    
+                    showRoom = hasMatchingBed;
+                }
+                
+                // Filtrar por comodidades
+                if (showRoom && selectedFilters.amenities.length > 0) {
+                    const hasAllAmenities = selectedFilters.amenities.every(amenity => 
+                        roomFeatures.includes(amenity)
+                    );
+                    
+                    showRoom = hasAllAmenities;
+                }
+                
+                // Mostrar/ocultar quarto
+                if (showRoom) {
+                    room.style.display = 'block';
+                    visibleRooms++;
+                } else {
+                    room.style.display = 'none';
+                }
+            });
+            
+            // Atualizar contador
+            roomsCount.textContent = visibleRooms;
+        });
+        
+        // Limpar filtros
+        clearFiltersBtn.addEventListener('click', function() {
+            filterCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            roomCards.forEach(room => {
+                room.style.display = 'block';
+            });
+            
+            roomsCount.textContent = roomCards.length;
+        });
+        
+        // Reserva de camas - Abrir modal
+        reserveButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const bedItem = this.closest('.bed-item');
+                const bedInfo = bedItem.querySelector('.bed-info h5').textContent;
+                const roomCard = bedItem.closest('.room-card');
+                const roomName = roomCard.querySelector('.room-header h3').textContent;
+                
+                roomDetailsInput.value = `${roomName} - ${bedInfo}`;
+                
+                // Mostrar o modal
+                reservationModal.style.display = 'block';
+                reservationModal.classList.add('active');
+                
+                // Scroll suave para o modal
+                setTimeout(() => {
+                    reservationModal.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start'
+                    });
+                }, 100);
+            });
+        });
+        
+        // Fechar modal
+        window.closeModal = function() {
+            reservationModal.style.display = 'none';
+            reservationModal.classList.remove('active');
+        }
+        
+        // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            if (event.target == reservationModal) {
+                closeModal();
+            }
+        }
+        
+// Envio do formulário de reserva
+reservationForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    
+    // DEBUG - Mostrar dados do formulário
+    console.log("Dados do formulário:");
+    for (let pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+    }
+    
+    // Mostrar loading
+    const submitBtn = this.querySelector('.btn-reserve-confirm');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
+    submitBtn.disabled = true;
+
+    fetch('php/processar_reserva.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        console.log("Status da resposta:", response.status);
+        console.log("OK?", response.ok);
+        return response.json().then(data => {
+            return {
+                status: response.status,
+                ok: response.ok,
+                data: data
+            };
+        });
+    })
+    .then(result => {
+        console.log("Resposta completa:", result);
+        
+        if (result.ok) {
+            if (result.data.success) {
+                showMessage(result.data.message, 'success');
+                
+                setTimeout(() => {
+                    closeModal();
+                    reservationForm.reset();
+                    
+                    if (result.data.reserva_id) {
+                        showMessage(`Reserva #${result.data.reserva_id} confirmada com sucesso! Entraremos em contato em breve.`, 'success');
+                    }
+                }, 2000);
+            } else {
+                let errorMessage = result.data.message;
+                if (result.data.errors) {
+                    errorMessage += ' ' + result.data.errors.join(' ');
+                }
+                showMessage(errorMessage, 'error');
+            }
+        } else {
+            // Servidor retornou um status de erro (4xx, 5xx)
+            showMessage(`Erro ${result.status}: ${result.data.message || 'Erro no servidor'}`, 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Erro completo:', error);
+        console.error('Tipo do erro:', error.name);
+        console.error('Mensagem do erro:', error.message);
+        
+        showMessage('Erro ao processar reserva. Tente novamente.', 'error');
+    })
+    .finally(() => {
+        // Restaurar botão
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    });
+});
+    });
+
+    // Função para exibir mensagens
+    function showMessage(message, type) {
+        // Remove qualquer mensagem existente
+        const existingMessage = document.querySelector('.message');
+        if (existingMessage) {
+            existingMessage.remove();
+        }
+
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${type}`;
+        messageDiv.textContent = message;
+        messageDiv.style.cssText = `
+            position: fixed;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            z-index: 10000;
+            font-weight: 600;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        `;
+
+        if (type === 'success') {
+            messageDiv.style.background = '#d4edda';
+            messageDiv.style.color = '#155724';
+            messageDiv.style.border = '1px solid #c3e6cb';
+        } else {
+            messageDiv.style.background = '#f8d7da';
+            messageDiv.style.color = '#721c24';
+            messageDiv.style.border = '1px solid #f5c6cb';
+        }
+
+        document.body.appendChild(messageDiv);
+
+        // Remove a mensagem após 5 segundos
+        setTimeout(() => {
+            if (messageDiv.parentNode) {
+                messageDiv.remove();
+            }
+        }, 5000);
+    }
+</script>
+</body>
+</html>

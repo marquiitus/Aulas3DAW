@@ -1,0 +1,450 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: #f8f9fa;
+  color: #030D4F;
+  line-height: 1.6;
+}
+
+/* ===== HEADER ===== */
+.header-full {
+  background: #030D4F;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-full {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.logo-main {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.logo-main a {
+  color: #FFC52C;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.nav-links-main {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  margin-left: 2rem;
+  margin-right: 0;
+  align-items: center;
+}
+
+.nav-links-main a {
+  text-decoration: none;
+  color: #CEECEF;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+}
+
+.nav-links-main a:hover {
+  color: #FFC52C;
+  background: rgba(255, 197, 44, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-full {
+  margin-top: 100px;
+  min-height: calc(100vh - 200px);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Hero Section - Design Minimalista */
+.admin-hero {
+  background: linear-gradient(135deg, #030D4F 0%, #1a237e 100%);
+  color: white;
+  text-align: center;
+  padding: 3rem 2rem;
+  margin-bottom: 3rem;
+  border-radius: 0 0 20px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover;
+  opacity: 0.05;
+}
+
+.admin-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  position: relative;
+}
+
+.admin-hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  font-weight: 300;
+  position: relative;
+}
+
+/* Dashboard Grid - Design Limpo */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.dashboard-card {
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(3, 13, 79, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #030D4F, #FFC52C);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(3, 13, 79, 0.12);
+}
+
+.card-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #030D4F, #1a237e);
+  color: #FFC52C;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin: 0 auto 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.dashboard-card:hover .card-icon {
+  transform: scale(1.1);
+}
+
+.dashboard-card h3 {
+  font-size: 1.3rem;
+  color: #030D4F;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.card-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #030D4F;
+  margin: 1rem 0;
+  line-height: 1;
+}
+
+.card-label {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.card-btn {
+  background: #030D4F;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.8rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.card-btn:hover {
+  background: #1a237e;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(3, 13, 79, 0.2);
+}
+
+/* Recent Section - Design Limpo */
+.recent-section {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(3, 13, 79, 0.08);
+  border: 1px solid #f0f0f0;
+  margin-bottom: 3rem;
+}
+
+.recent-section h2 {
+  color: #030D4F;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.reservations-table {
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+th, td {
+  padding: 1.2rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #030D4F;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+td {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+tr:hover {
+  background: #f8f9fa;
+}
+
+/* Status Badges - Design Minimalista */
+.status {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status.confirmed {
+  background: #e8f5e8;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+.status.pending {
+  background: #fff8e1;
+  color: #f57c00;
+  border: 1px solid #ffecb3;
+}
+
+.status.active {
+  background: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #bbdefb;
+}
+
+/* Action Buttons - Design Consistente */
+.action-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.action-btn:last-child {
+  margin-right: 0;
+}
+
+.action-btn.view {
+  background: #030D4F;
+  color: white;
+}
+
+.action-btn.view:hover {
+  background: #1a237e;
+  transform: translateY(-1px);
+}
+
+.action-btn.edit {
+  background: #FFC52C;
+  color: #030D4F;
+}
+
+.action-btn.edit:hover {
+  background: #FBC006;
+  transform: translateY(-1px);
+}
+
+.action-btn.confirm {
+  background: #28a745;
+  color: white;
+}
+
+.action-btn.confirm:hover {
+  background: #218838;
+  transform: translateY(-1px);
+}
+
+/* Footer */
+.footer-main {
+  background: #030D4F;
+  color: #CEECEF;
+  padding: 2rem;
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-content p {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-full {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .nav-links-main {
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .admin-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .admin-hero p {
+    font-size: 1.1rem;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .dashboard-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .recent-section {
+    padding: 2rem 1.5rem;
+  }
+  
+  th, td {
+    padding: 1rem 0.8rem;
+  }
+  
+  .main-full {
+    margin-top: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-hero {
+    padding: 2.5rem 1rem;
+  }
+  
+  .admin-hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .admin-hero p {
+    font-size: 1rem;
+  }
+  
+  .nav-links-main a {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+  
+  .logo-main {
+    font-size: 1.8rem;
+  }
+  
+  .card-number {
+    font-size: 2rem;
+  }
+  
+  .recent-section {
+    padding: 1.5rem 1rem;
+  }
+  
+  .action-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    margin-right: 0.3rem;
+  }
+}

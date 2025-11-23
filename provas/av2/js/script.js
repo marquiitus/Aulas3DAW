@@ -26,9 +26,21 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(data => {
         if (data.success) {
           showMessage('Login realizado com sucesso!', 'success');
-          setTimeout(() => {
-            window.location.href = 'index.html';
-          }, 1000);
+          
+          // VERIFICAÇÃO DO ADMIN DEVE ESTAR AQUI DENTRO
+          if (data.is_admin) {
+            // Salvar no sessionStorage que é admin
+            sessionStorage.setItem('is_admin', 'true');
+            // Redirecionar para o painel administrativo
+            setTimeout(() => {
+              window.location.href = 'admin.html';
+            }, 1000);
+          } else {
+            // Redirecionar para página normal de usuário
+            setTimeout(() => {
+              window.location.href = 'index.html';
+            }, 1000);
+          }
         } else {
           showMessage(data.message, 'error');
         }
